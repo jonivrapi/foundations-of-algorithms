@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
 
 \title{Homework 1}
 \author{Joni Vrapi}
@@ -12,7 +14,7 @@
 
 \textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
 
-\section*{}
+\hfill
 
 \textbf{Problem 1.} For this problem we are asked to describe the time complexity of the stated linear search algorithm, showing the tightest asymptotic representation from $\Theta$, $O$, or $\Omega$. My first inkling on this was to heed the name of the algorithm and assume that it is, in fact, linear in time. This algorithm accepts a parameter $x$, which is the thing that is being searched for, and another parameter $A$, which is the array that is to be searched. If $x \in A$, the index of $x$ is returned. 
 
@@ -52,11 +54,78 @@ The dominant term here is the $\frac{n}{2}$, so the average case complexity here
 Which was pulled from \cite{website:1}, we can not have an asymptotically tight bound. I would therefore argue that the tightest bound here is $O(n)$.
 
 
-\section*{}
+\hfill
 
-\textbf{Problem 2.} For this problem we are asked to describe the time complexity of the stated binary search algorithm. This is a wicked interesting searching algorithm because it begins with an item to be found, $x$, and a \emph{sorted} input array $A$. It works by comparing $x$ to the value in the middle of $A$, and then narrowing the search to only the left/right half of $A$ (depending on if the value of $x > A[i] \lor x < A[i]$), and then repeating itself. This continues until either the value is found, or the interval of the array that you are looking at is empty, at which point it returns either the index of the found item, or zero if it's not found. This is an excellent strategy for finding things, because whenever you are able to reduce your problem size on each iteration, you are talking about logarithmic time (which is faster than linear time!). The question, however, begets a precise asymptotic bound, but knowing that the problem size is being reduced gives me a hint that my answer should have a $log(n)$ in it.
+\textbf{Problem 2a.} For this problem we are asked to describe the time complexity of the stated binary search algorithm. This is a wicked interesting searching algorithm because it begins with an item to be found, $x$, and a \emph{sorted} input array $A$. It works by comparing $x$ to the value in the middle of $A$, and then narrowing the search to only the left/right half of $A$ (depending on if the value of $x > A[i] \lor x < A[i]$), and then repeating itself. This continues until either the value is found, or the interval of the array that you are looking at is empty, at which point it returns either the index of the found item, or zero if it's not found. This is an excellent strategy for finding things, because whenever you are able to reduce your problem size on each iteration, you are talking about logarithmic time (which is faster than linear time!). The question, however, begets a precise asymptotic bound, but knowing that the problem size is being reduced gives me a hint that my answer should have a $log(n)$ in it.
 
-So, let's think about this. The \emph{best case} scenario would be if $x = A[\frac{A.length}{2}]$, making the algorithm exit after only 1 comparison, leading to an $\Omega(1)$
+So, let's think about this. The \emph{best case} scenario would be if $x = A[\frac{A.length}{2}]$, making the algorithm exit after only 1 comparison, leading to an $\Omega(1)$. For the \emph{worst case}, letting $B =$ the interval of the array we are searching, we have
+
+\begin{itemize}
+    \item On the first iteration: $B.length = n$.
+    \item On the second iteration: $B.length = \frac{n}{2}$.
+    \item On the third iteration: $B.length = \frac{n}{2^2}$.
+    \item On the $k^{th}$ iteration: $B.length = \frac{n}{2^k}$.
+\end{itemize}
+
+We also know that after $k$ iterations, $B.length = 1$,
+
+\begin{gather}
+    \therefore \frac{n}{2^k} = 1
+\end{gather}
+
+Applying the $log$ function to both sides yields
+
+\begin{gather}
+    log(n) = log(2^k) \implies log(n) = klog(2) \\
+    \therefore k = log(n)
+\end{gather}
+
+This will therefore yield a worst case time complexity of $O(logn)$ for binary search. Due to (6), and considering the best and worst case complexities being different, I would argue the tightest bound is $O(logn)$.
+
+\hfill
+
+\textbf{Problem 2b.} This algorithm makes use of the $\lfloor floor \rfloor$ function to determine the middle index of the array interval that it is currently looking at. While the floor function runs in constant time, its use can be eliminated by a clever manipulation of the middle index. From \cite{website:3} we see that we can
+
+\begin{codebox}
+    \Procname{$\proc{Binary-Search}(x,A)$}
+    \li i = 1
+    \li j = \attrib{A}{length}
+    \li \While $i < j$ \Do
+    \li $m = (i + j)/2$
+        \li \If $x > A[m]$
+            \li \Then $i = m + 1$
+            \li \Else $j = m - 1$
+            \End
+        \li \If $x = A[i]$
+            \li \Then location = i
+            \li \Else location = 0
+            \End
+        \End
+    \li \Return location
+\end{codebox}
+
+...change line 7 in the algorithm to subtract 1 from $m$ instead of setting $j = m$, resulting in the same algorithm as before, but without use of the $\lfloor floor \rfloor$ function. This does not change the overall time complexity of the algorithm, keeping it at $O(logn)$, but it does make it run slightly faster. 
+
+\hfill
+
+\textbf{Problem 3.} For this problem we are asked to solve the recurrence relation
+
+\begin{gather}
+    T(n) = 4T(\frac{n}{4}) + n^2
+\end{gather}
+
+The first thing that pops into my mind looking at this problem is that the Master Theorem applies, and will likely be the easiest way of proving this. From the master theorem
+
+\begin{gather}
+    T(n) = aT(\frac{n}{b}) + f(n)
+\end{gather}
+
+
+We can see that $a = 4$, and $b = 4$. Since $a > 1$, $b > 1$, and $f$ is asymptotically positive, we can see that $n^{\log_ab} \implies n^{\log_44} \implies n$ and $f(n) = n^2$. The master theorem tells us to then check whether $4f(\frac{n}{4}) \leq cf(n)$ for some $c < 1$ and $\forall n$ sufficiently large which is indeed the case here.
+
+\begin{gather}
+    \therefore T(n) \implies \Theta(f(n)) = \Theta(n^2)
+\end{gather}
 
 \newpage
 \bibliography{citation} 
