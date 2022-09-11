@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{url}
+
+\title{Homework 1}
+\author{Joni Vrapi}
+\date{09/10/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\section*{}
+
+\textbf{Problem 1.} For this problem we are asked to describe the time complexity of the stated linear search algorithm, showing the tightest asymptotic representation from $\Theta$, $O$, or $\Omega$. My first inkling on this was to heed the name of the algorithm and assume that it is, in fact, linear in time. This algorithm accepts a parameter $x$, which is the thing that is being searched for, and another parameter $A$, which is the array that is to be searched. If $x \in A$, the index of $x$ is returned. 
+
+It begins by iterating through the array, checking if the indexing variable $i \leq A.length$ and that $x \neq A[i]$. This, to me, implies that in the \emph{worst case}, where the item that you are searching for is not in input the array, this algorithm will loop through every item in the array for a total of $n$ times for a time complexity of $O(n)$. Finally, it checks if $i \leq A.length$ and assigns to the $location$ variable either the indexing variable $i$ or $0$ if $i > A.length$. This implies that the \emph{best case} scenario for this algorithm, where the item that you are looking for is in the first position of the array, is $\Omega(1)$. For the average case, we have two cases:
+
+\begin{enumerate}
+    \item The item can be in any of $n$ possible positions in the array, from index $1$ to index $n+1$.
+    \item The item is not in the array.
+\end{enumerate}
+
+So, there are $n$ possibilities in the first case, and 1 possibility in the second case, for a total of $n+1$ possibilities. If the item you are looking for is at index $k$, linear search will do $k+1$ comparisons. Summing those up, you get the known sum of \cite{website:2}:
+
+\begin{gather}
+    \frac{n(n+1)}{2}
+\end{gather}
+
+In the second case, there are $n$ possible positions in the array, and all of them are searched, with no result being found. Therefore, the total amount of cases for both situations are:
+
+\begin{gather}
+    \frac{n(n+1)}{2} + n \\
+    = n(\frac{n+1}{2}+1)
+\end{gather}
+
+For the average number of comparisons we have 
+
+\begin{gather}
+    \frac{n(\frac{n+1}{2}+1)}{n+1} \\
+    = \frac{n}{2} + \frac{n}{n+1}
+\end{gather}
+
+The dominant term here is the $\frac{n}{2}$, so the average case complexity here is also $O(n)$. What is the tightest asymptotic representation? Because of the best case complexity here being $\Omega(1)$ and the worst case being $O(n)$ as well as:
+
+\begin{gather}
+    \Theta(f(n)) \Leftrightarrow (\Omega(f(n)) \land O(f(n)))
+\end{gather}
+
+Which was pulled from \cite{website:1}, we can not have an asymptotically tight bound. I would therefore argue that the tightest bound here is $O(n)$.
+
+
+\section*{}
+
+\textbf{Problem 2.} For this problem we are asked to describe the time complexity of the stated binary search algorithm. This is a wicked interesting searching algorithm because it begins with an item to be found, $x$, and a \emph{sorted} input array $A$. It works by comparing $x$ to the value in the middle of $A$, and then narrowing the search to only the left/right half of $A$ (depending on if the value of $x > A[i] \lor x < A[i]$), and then repeating itself. This continues until either the value is found, or the interval of the array that you are looking at is empty, at which point it returns either the index of the found item, or zero if it's not found. This is an excellent strategy for finding things, because whenever you are able to reduce your problem size on each iteration, you are talking about logarithmic time (which is faster than linear time!). The question, however, begets a precise asymptotic bound, but knowing that the problem size is being reduced gives me a hint that my answer should have a $log(n)$ in it.
+
+So, let's think about this. The \emph{best case} scenario would be if $x = A[\frac{A.length}{2}]$, making the algorithm exit after only 1 comparison, leading to an $\Omega(1)$
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 
