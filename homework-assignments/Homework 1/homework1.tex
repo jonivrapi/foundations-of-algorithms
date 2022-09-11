@@ -127,6 +127,48 @@ We can see that $a = 4$, and $b = 4$. Since $a > 1$, $b > 1$, and $f$ is asympto
     \therefore T(n) \implies \Theta(f(n)) = \Theta(n^2)
 \end{gather}
 
+\textbf{Problem 4.} For this problem we are asked to solve the recurrence relation
+
+\begin{gather}
+    T(n) = 3T(\frac{n}{3} + 1) + n
+\end{gather}
+
+The first thing that pops into my mind looking at this problem is that the Master Theorem applies, and will likely be the easiest way of proving this. From the master theorem
+
+\begin{gather}
+    T(n) = aT(\frac{n}{b}) + f(n)
+\end{gather}
+
+
+We can see that $a = 3$, and $b = 3$. Since $a > 1$, $b > 1$, and $f$ is asymptotically positive, we can see that $n^{\log_ab} \implies n^{\log_33} \implies n$ and $f(n) = n$. At this point, I was confused about what to do with the remaining $+1$ in this relation, but proceeded to drop it as an insignificant term. Hopefully this was correct.
+
+The master theorem then tells us that $T(n) \implies \Theta(nlog(n))$.
+
+\begin{gather}
+    \therefore T(n) = \Theta(nlog(n))
+\end{gather}
+
+\textbf{Problem 5.} For this problem we are asked to solve the recurrence relation
+
+\begin{gather}
+    T(n) = T(\sqrt{n}) + 1
+\end{gather}
+
+The first thing that pops into my mind looking at this problem is that I think we need to use substitution with the Master Theorem in order to solve this. If we substitute $n = 2^m$, we obtain
+
+\begin{gather}
+    T(2^m) = T(\sqrt{2^m}) + 1 = T(2^{\frac{m}{2}}) + 1
+\end{gather}
+
+We can then define
+
+\begin{gather}
+    S(m) = T(2^m) \\
+    \therefore S(m) = S(\frac{m}{2}) + 1
+\end{gather}
+
+At this point I am unsure, however by the Master Theorem I believe that $S(m) \in \Theta(2^m)$ which $\implies T(n) \in \Theta(n)$
+
 \newpage
 \bibliography{citation} 
 \bibliographystyle{ieeetr}
