@@ -56,7 +56,7 @@ Which was pulled from \cite{website:1}, we can not have an asymptotically tight 
 
 \hfill
 
-\textbf{Problem 2a.} For this problem we are asked to describe the time complexity of the stated binary search algorithm. This is a wicked interesting searching algorithm because it begins with an item to be found, $x$, and a \emph{sorted} input array $A$. It works by comparing $x$ to the value in the middle of $A$, and then narrowing the search to only the left/right half of $A$ (depending on if the value of $x > A[i] \lor x < A[i]$), and then repeating itself. This continues until either the value is found, or the interval of the array that you are looking at is empty, at which point it returns either the index of the found item, or zero if it's not found. This is an excellent strategy for finding things, because whenever you are able to reduce your problem size on each iteration, you are talking about logarithmic time (which is faster than linear time!). The question, however, begets a precise asymptotic bound, but knowing that the problem size is being reduced gives me a hint that my answer should have a $log(n)$ in it.
+\textbf{Problem 2a.} For this problem we are asked to describe the time complexity of the stated binary search algorithm. This is a wicked interesting searching algorithm because it begins with an item to be found, $x$, and a \emph{sorted} input array $A$. It works by comparing $x$ to the value in the middle of $A$, and then narrowing the search to only the left/right half of $A$ (depending on if the value of $x > A[i] \lor x < A[i]$), and then repeating itself. This continues until either the value is found, or the interval of the array that you are looking at is empty, at which point it returns either the index of the found item, or zero if it's not found. This is an excellent strategy for finding things, because whenever you are able to reduce your problem size by half on each iteration, you are talking about logarithmic time (which is faster than linear time!). The question, however, begets a precise asymptotic bound, but knowing that the problem size is being reduced gives me a hint that my answer should have a $log(n)$ in it.
 
 So, let's think about this. The \emph{best case} scenario would be if $x = A[\frac{A.length}{2}]$, making the algorithm exit after only 1 comparison, leading to an $\Omega(1)$. For the \emph{worst case}, letting $B =$ the interval of the array we are searching, we have
 
@@ -80,7 +80,7 @@ Applying the $log$ function to both sides yields
     \therefore k = log(n)
 \end{gather}
 
-This will therefore yield a worst case time complexity of $O(logn)$ for binary search. Due to (6), and considering the best and worst case complexities being different, I would argue the tightest bound is $O(logn)$.
+This will therefore yield a worst case time complexity of $O(log(n))$ for binary search. Due to (6), and considering the best and worst case complexities being different, I would argue the tightest bound is $O(log(n))$.
 
 \hfill
 
@@ -104,7 +104,7 @@ This will therefore yield a worst case time complexity of $O(logn)$ for binary s
     \li \Return location
 \end{codebox}
 
-...change line 7 in the algorithm to subtract 1 from $m$ instead of setting $j = m$, resulting in the same algorithm as before, but without use of the $\lfloor floor \rfloor$ function. This does not change the overall time complexity of the algorithm, keeping it at $O(logn)$, but it does make it run slightly faster. 
+...change line 7 in the algorithm to subtract 1 from $m$ instead of setting $j = m$, resulting in the same algorithm as before, but without use of the $\lfloor floor \rfloor$ function. This does not change the overall time complexity of the algorithm, keeping it at $O(log(n))$, but it does make it run slightly faster. 
 
 \hfill
 
@@ -127,6 +127,8 @@ We can see that $a = 4$, and $b = 4$. Since $a > 1$, $b > 1$, and $f$ is asympto
     \therefore T(n) \implies \Theta(f(n)) = \Theta(n^2)
 \end{gather}
 
+\hfill
+
 \textbf{Problem 4.} For this problem we are asked to solve the recurrence relation
 
 \begin{gather}
@@ -148,6 +150,8 @@ The master theorem then tells us that $T(n) \implies \Theta(nlog(n))$.
     \therefore T(n) = \Theta(nlog(n))
 \end{gather}
 
+\hfill
+
 \textbf{Problem 5.} For this problem we are asked to solve the recurrence relation
 
 \begin{gather}
@@ -168,6 +172,110 @@ We can then define
 \end{gather}
 
 At this point I am unsure, however by the Master Theorem I believe that $S(m) \in \Theta(2^m)$ which $\implies T(n) \in \Theta(n)$
+
+\hfill
+
+\textbf{Problem 6a.} For this problem we are asked to prove that insertion sort can sort the $\frac{n}{k}$ sublists, each of length $k$, in $\Theta(nk)$ worst case time.
+
+If we can say that, for an input of size $n$, insertion sort runs on $\Theta(n^2)$ worst case time, then we can also say that for an input of size $k$, insertion sort runs on $\Theta(k^2)$ worst case time. So, the worst case time to sort $\frac{n}{k}$ sublists of length $k$ will be:
+
+\begin{gather}
+    \frac{n}{k} * \Theta(k^2) \implies \Theta(nk)
+\end{gather}
+
+Proving this by induction we can say:
+
+\begin{gather}
+    n = 1 \\
+    \frac{1}{k}*k^2 = 1k
+\end{gather}
+
+Assuming $n=k$ we can say:
+
+\begin{gather}
+    \frac{k}{k}*k^2=k*k \\
+    k^2 = k^2
+\end{gather}
+
+From $n = k$ we show that the result holds for $n=k+1$
+
+\begin{gather}
+    \frac{k+1}{k}*k^2=(k+1)k \\
+    = (k+1)k = (k+1)k
+\end{gather}
+
+\hfill
+
+\textbf{Problem 6b.} For this problem we are asked to prove how to merge the sublists in $\Theta(nlog(\frac{n}{k}))$ worst case time.
+
+For this problem, we have $n$ elements divided into $\frac{n}{k}$ sublists of length $k$. In order to merge these into one list of length $n$, we have to take two sublists at a time and recursively merge them. From Figure 2.5 (my page numbers are off, so I did not mention them here because they will be different from yours) \cite{CLRS} we see that this will take $log(\frac{n}{k})$ steps, and at every step, we will do $n$ comparisons. $\therefore$ the whole process will run in $\Theta(nlog(\frac{n}{k}))$
+
+I was not sure how to develop a formal proof for this, however, so after scouring the internet I was able to find \cite{website:4} which I will reference here.
+
+The recurrence relation for merging the sublists is 
+
+\begin{equation}
+    T(a) = {
+    \begin{cases}
+        0 & \text{if } a = 1, \\
+        2T(\frac{a}{2}) + ak & \text{if } a = 2^p, \text{if } p > 0
+    \end{cases}
+    } 
+\end{equation}
+
+
+Proving this by induction we can say:
+
+\begin{gather}
+    T(1) = 1klog(1) = k * 0 = 0
+\end{gather}
+
+Assuming $T(a)=aklog(a)$ we can say:
+
+\begin{gather}
+    T(2a) = 2T(a) + 2ak = 2(T(a) + ak) = 2(aklog(a) + ak) \\
+    = 2ak(log(a) + 1) = 2ak(log(a) + log(2)) \\
+    = 2aklog(2a)
+\end{gather}
+
+Substituting in $\frac{n}{k}$ for a:
+
+\begin{gather}
+    T(\frac{n}{k}) = \frac{n}{k}klog(\frac{n}{k}) \\
+    \implies nlog(\frac{n}{k})
+\end{gather}
+
+\hfill
+
+\textbf{Problem 6c.} For this problem we are asked what the largest value of $k$, as a function of $n$, is that will make the modified algorithm (which runs in $\Theta(nk + nlog(\frac{n}{k}))$) have the same running time as the standard merge sort ($\Theta(nlog(n))$).
+
+For this problem, I believe we can do some algebra as well. For example, for the modified algorithm to have the same running time as the standard one, $k$ must not grow faster than $log(n)$, because if it does, then because of the $nk$ term, the algorithm will run slower than $\Theta(nlog(n))$. Therefore, if we assume that $k = log(n)$ we can:
+
+\begin{gather}
+    k = log(n) \\
+    \Theta(nk + nlog(\frac{n}{k})) \\
+    \begin{split}
+        &= \Theta(nk + nlog(n) - nlog(k)) \\
+        &= \Theta(n(log(n)) + nlog(n) - nlog(log(n)))) \\
+        &= \Theta(2nlog(n) - nlog(log(n)) \\
+        &= \Theta(nlog(n))
+    \end{split}
+\end{gather}
+
+\hfill
+
+\textbf{Problem 6d.} For this problem we are asked how we should choose the optimal value of $k \mid$ insertion sort $>$ merge sort. To do this, I think we need to calculate the exact running time expression based on the method in \cite{CLRS} in Exercise 1.2.2. In Exercise 1.2.2 we are told that, for inputs of size $n$, insertion sort runs in $8n^2$ steps, while merge sort runs in $64nlog(n)$ steps. So, basically, I believe we have to make the following inequality \emph{false}:
+
+\begin{gather}
+    8n^2 < 64nlog(n) \\
+    \begin{align}
+        = n < 8log(n) \\
+        = \frac{n}{8} < log(n) \\
+        = 2^{\frac{n}{8}} < n
+    \end{align}
+\end{gather}
+
+Which is to say that, for whatever values of $n$ we can use to make this inequality false, e.g. $2^{\frac{n}{8}} > n$, that will be the value at which merge sort becomes faster than insertion sort again. I say "again" here because we know insertion sort runs in $\Theta(n^2)$ which is a lot slower as $n \to \infty$ than merge sort's $\Theta(nlog(n))$. At $n = 1$, merge sort beats insertion sort, but for values greater than 1 and less than $k$, insertion sort beats merge sort. For what value that is exactly, I just brute forced it starting with $n = 8$ and going up by powers of 2 until it was true, then walking it back down binary-search (by hand) style. Through this I was able to find that $n = 44$ is the pivot value where merge sort starts to beat insertion sort again. $\therefore 1 > n < 44$ describes the space where insertion sort beats merge sort.
 
 \newpage
 \bibliography{citation} 
