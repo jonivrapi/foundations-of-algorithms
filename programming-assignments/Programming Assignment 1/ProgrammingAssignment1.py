@@ -2,6 +2,13 @@ from typing import List
 from utils import *
 import random
 
+points: List[Point] = []
+length = 0
+# setting n modifies how many points are generated
+n = 10
+# setting m modifies how many of the closest pairs are returned
+m = 5
+
 # algorithm that checks each point against every other point, not including itself or previously checked points, then populates an array with the pairs, and sorts them by distance, returning the m closest pairs. 
 def mClosestPoints(points: List[Point], m: int):
     if m > len(points):
@@ -27,3 +34,17 @@ def mClosestPoints(points: List[Point], m: int):
     length = len(pairs)
     
     return pairs[:m], length
+
+# -- Driver code --
+
+for i in range(n):
+    x: int = random.randint(0, 10000)
+    y: int = random.randint(0, 10000)
+    points.append(Point(x, y))
+
+(pairs, length) = mClosestPoints(points, m)
+print(f"Total Iterations: {length}")
+
+for i in range(len(pairs)):
+    print(pairs[i].toString())
+
