@@ -15,8 +15,11 @@ Finally, the `utils.py` file simply serves to export some of the functionality t
 3. charts.py
 4. functools.cover
 5. ProgrammingAssignment1.cover
-6. ProgrammingAssignment1.py
-7. random.cover
-8. README.md
-9. typing.cover
-10. utils.py
+6. ProgrammingAssignment1.pdf
+7. ProgrammingAssignment1.py
+8. random.cover
+9. README.md
+10. typing.cover
+11. utils.py
+
+All `.cover` files are trace files. All `.py` files are code files. The `.pdf` file is my compiled latex for this assignment.
