@@ -16,10 +16,14 @@ for n in numberOfInputs:
         points.append(Point(x, y))
 
     (pairs, length) = mClosestPoints(points, m)
-    print(length)
+    print(f"Iterations: {length}")
     numberOfIterations.append(length)
 
 plt.scatter(numberOfInputs, numberOfIterations)
+
+x = np.arange(0, n, 1)
+y = x**2
+plt.plot(x, y)
 
 plt.xlabel("Number of Inputs")
 plt.ylabel("Number of Iterations")
