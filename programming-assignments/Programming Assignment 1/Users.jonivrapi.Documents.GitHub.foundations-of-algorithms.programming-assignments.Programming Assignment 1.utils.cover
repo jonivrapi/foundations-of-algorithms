@@ -1,0 +1,29 @@
+    1: import math
+       # Object that represents a point in 2d space with an x and y coordinate.
+    2: class Point:
+    1:     def __init__(self, x: int, y: int):
+   10:         self.x = x
+   10:         self.y = y
+           
+    1:     def toString(self):
+               return f"Point: ({self.x}, {self.y})"
+       
+       # Object that represents a pair of points, and their distance
+    2: class Pair:
+    1:     def __init__(self, pointA: Point, pointB: Point, distance: float):
+   45:         self.pointA = pointA
+   45:         self.pointB = pointB
+   45:         self.distance = distance
+       
+    1:     def toString(self):
+    5:         return f"PointA: ({self.pointA.x}, {self.pointA.y}) | PointB: ({self.pointB.x}, {self.pointB.y}). Distance between the points: {self.distance}"
+       
+       # Utility method that calculates the Euclidean distance between two points
+    1: def euclideanDistance(pointA: Point, pointB: Point):
+   45:     xDifference = pointA.x - pointB.x
+   45:     yDifference = pointA.y - pointB.y
+       
+   45:     xDifferenceSquared = pow(xDifference, 2)
+   45:     yDifferenceSquared = pow(yDifference, 2)
+           
+   45:     return math.sqrt(xDifferenceSquared + yDifferenceSquared)

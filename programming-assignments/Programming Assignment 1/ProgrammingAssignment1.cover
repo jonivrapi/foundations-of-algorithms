@@ -1,0 +1,65 @@
+    1: from typing import List
+    1: from utils import *
+    1: import random
+       
+       
+    1: length = 0
+       
+       # algorithm that checks each point against every other point, not including itself or previously checked points, then populates an array with the pairs, and sorts them by distance. 
+    1: def mClosestPoints(points: List[Point], m: int):
+    1:     if m > len(points):
+               raise ValueError('You have chosen an m that is too large given the length of the list of points.')
+    1:     elif m < 0:
+               raise ValueError('You cannot choose an m less than zero.')
+       
+    1:     pairs = []
+    1:     pointA = None
+    1:     pointB = None
+       
+   11:     for i in range(len(points)):
+   55:         for j in range(i + 1, len(points)):
+   45:             pointA = points[i]
+   45:             pointB = points[j]
+   45:             distance = euclideanDistance(pointA, pointB)
+                   
+   45:             pairs.append(Pair(pointA, pointB, distance))
+       
+           # python's sorted() uses timsort, which is nlogn worst-case
+   46:     pairs = sorted(pairs, key=lambda pair: pair.distance)
+    1:     length = len(pairs)
+    1:     print(f"length: {length}")
+           
+    1:     return pairs[:m]
+       
+       
+    1: points: List[Point] = []
+       
+    1: n = 10
+    1: m = 5
+       
+   11: for i in range(n):
+   10:     x: int = random.randint(0, 10000)
+   10:     y: int = random.randint(0, 10000)
+   10:     points.append(Point(x, y))
+       
+    1: pairs = mClosestPoints(points, m)
+       
+    6: for i in range(len(pairs)):
+    5:     print(pairs[i].toString())
+       
+       
+       # importing the required modules
+       # import matplotlib.pyplot as plt
+       # import numpy as np
+         
+       # # setting the x - coordinates
+       # x = np.arange(0, 2*(np.pi), 0.1)
+       # # setting the corresponding y - coordinates
+       # y = x**2
+         
+       # # plotting the points
+       # plt.plot(x, y)
+       # plt.plot(x+1, y+1)
+         
+       # # function to show the plot
+       # plt.show()
