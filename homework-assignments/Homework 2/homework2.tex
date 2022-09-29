@@ -23,6 +23,29 @@
 
 \textbf{Problem 2.} A transitive relation $R$ on a set $X$ occurs when $\forall a, b, c \in X \mid (aRb) \land (bRc) \implies (aRc)$ \cite{website:2}. If we let $f(x)$ be the polynomial time reduction function $\mid x \in L_1 \iff f(x) \in L_2$. We can then define $g(x)$ to be the polynomial time reduction function $\mid x \in L_2 \iff g(x) \in L_3$. We can then compute, in polynomial time, $g \circ f \mid x \in L_1 \iff g(f(x)) \in L_3$. $\therefore L_1 \leq_P L_3$, so $\leq_P$ is transitive.
 
+\hfill
+
+\textbf{Problem 3a.} $L_1 = \{ a^nb^n \mid 0 \leq n \leq 1000 \}$ \\
+Since $n \leq 1000$,  $L_1$ is finite. All finite languages are regular. All regular languages belong to Type 3.
+
+\hfill
+
+\textbf{Problem 3b.} $L_2 = \{ a^nb^n \mid n \geq 0 \}$ \\
+Since $n \geq 0$,  $L_2$ is infinite. This is not a regular language as it does not satisfy the pumping lemma. There is, however, a context free grammar. Context free grammars are of Type 2.
+
+\hfill
+
+\textbf{Problem 3c.} $L_3 = \{ a^nb^m \mid n,m \geq 0 \}$ \\
+$L_3$ can be written as a regular expression in the form $a^*b^*$, therefore this is regular and regular grammars are of Type 3.
+
+\hfill
+
+\textbf{Problem 4.} By contradiction, assume that there exists some maximal clique $K$ of graph $G$ such that $\chi(G) < |K|$. Let's also assume a proper coloring \cite{website:4} $C$ of $G$ which takes $\chi(G)$ colors. Using the pigeonhole principle \cite{website:3}, let the vertices of $K$ be the pigeons, while the colors assigned to them are the holes. At least two vertices in $K$ should be the same color, and we can label them $V_1$ and $V_2$. $\therefore C(V_1) = C(V_2)$. From the definition of a clique, we know that every pair of vertices in $K$ are adjacent, therefore $V_1$ and $V_2$ are adjacent in $K$ as well as $G$. But, as stated before, we also have $C(V_1) = C(V_2)$, which is a contradiction to the fact that $C$ is a proper coloring. Therefore, we can conclude that $\chi(G)$ is no less than the size of any maximal clique of $G$.
+
+\hfill
+
+\textbf{Problem 5.} 
+
 \newpage
 \bibliography{citation} 
 \bibliographystyle{ieeetr}
