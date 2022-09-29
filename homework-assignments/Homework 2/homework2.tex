@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
+
+\title{Homework 2}
+\author{Joni Vrapi}
+\date{09/25/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\hfill
+
+\textbf{Problem 1.} A language is \emph{decidable} if a Turing machine accepts strings that are in the language, and rejects strings that are not in the language. In other words, the Turing machine will halt on all inputs \cite{website:1}. From this, we can see that an \emph{undecidable} language is one in which a Turing machine will not halt. Suppose we have a Turing machine $M$ which can decide a language $L$. We can therefore create another Turing machine $M'$, by running $M$ and switching its accepts to rejects and vice versa, that decides $L^C$. $M$ will always halt if it decides $L$, therefore we do not need to worry $L^C$ will cause $M$ to never halt. If decidable languages are closed under complementation, then undecidable languages must be as well.
+
+\hfill
+
+\textbf{Problem 2.} A transitive relation $R$ on a set $X$ occurs when $\forall a, b, c \in X \mid (aRb) \land (bRc) \implies (aRc)$ \cite{website:2}. If we let $f(x)$ be the polynomial time reduction function $\mid x \in L_1 \iff f(x) \in L_2$. We can then define $g(x)$ to be the polynomial time reduction function $\mid x \in L_2 \iff g(x) \in L_3$. We can then compute, in polynomial time, $g \circ f \mid x \in L_1 \iff g(f(x)) \in L_3$. $\therefore L_1 \leq_P L_3$, so $\leq_P$ is transitive.
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 
