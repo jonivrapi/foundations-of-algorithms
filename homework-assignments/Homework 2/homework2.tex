@@ -17,11 +17,11 @@
 
 \hfill
 
-\textbf{Problem 1.} A language is \emph{decidable} if a Turing machine accepts strings that are in the language, and rejects strings that are not in the language. In other words, the Turing machine will halt on all inputs \cite{website:1}. From this, we can see that an \emph{undecidable} language is one in which a Turing machine will not halt. Suppose we have a Turing machine $M$ which can decide a language $L$. We can therefore create another Turing machine $M'$, by running $M$ and switching its accepts to rejects and vice versa, that decides $L^C$. $M$ will always halt if it decides $L$, therefore we do not need to worry $L^C$ will cause $M$ to never halt. If decidable languages are closed under complementation, then undecidable languages must be as well.
+\textbf{Problem 1.} A language is \emph{decidable} if a Turing machine accepts strings that are in the language, and rejects strings that are not in the language. In other words, the Turing machine will halt on all inputs \cite{website:1}. From this, we can see that an \emph{undecidable} language is one in which a Turing machine will not halt. Suppose we have a Turing machine $M$ which can decide a language $L$. We can therefore create another Turing machine $M'$ by running $M$ and switching its accepts to rejects and vice versa, that decides $L^C$. $M$ will always halt if it decides $L$, therefore we do not need to worry $L^C$ will cause $M$ to never halt. If decidable languages are closed under complementation, then undecidable languages must be as well.
 
 \hfill
 
-\textbf{Problem 2.} A transitive relation $R$ on a set $X$ occurs when $\forall a, b, c \in X \mid (aRb) \land (bRc) \implies (aRc)$ \cite{website:2}. If we let $f(x)$ be the polynomial time reduction function $\mid x \in L_1 \iff f(x) \in L_2$. We can then define $g(x)$ to be the polynomial time reduction function $\mid x \in L_2 \iff g(x) \in L_3$. We can then compute, in polynomial time, $g \circ f \mid x \in L_1 \iff g(f(x)) \in L_3$. $\therefore L_1 \leq_P L_3$, so $\leq_P$ is transitive.
+\textbf{Problem 2.} A transitive relation $R$ on a set $X$ occurs when $\forall a, b, c \in X \mid (aRb) \land (bRc) \implies (aRc)$ \cite{website:2}. We can define $f(x)$ to be the polynomial time reduction function such that $x \in L_1 \iff f(x) \in L_2$. We can then define $g(x)$ to be the polynomial time reduction function such that $x \in L_2 \iff g(x) \in L_3$. Finally, we can then compute, in polynomial time, $g \circ f \mid x \in L_1 \iff g(f(x)) \in L_3$. $\therefore L_1 \leq_P L_3$, so $\leq_P$ is transitive.
 
 \hfill
 
@@ -44,7 +44,40 @@ $L_3$ can be written as a regular expression in the form $a^*b^*$, therefore thi
 
 \hfill
 
-\textbf{Problem 5.} Starting with the adjacency matrix representation \cite{website:5}, because it is easier, we can use an integer $x$ to represent the number of vertices and encode this integer in the normal way integers are encoded in binary. Following this, there will be $x^2$ bits. The value of bit $y$ will be 1 if there is an edge from vertex $\lfloor m/n \rfloor$ to vertex $m\%n$, and 0 if there is not an edge there. For the adjacency list representation \cite{website:5}, we should use a different encoding for integers that pads each bit with a 0. This will allow us to ensure that the string 11 will never be found in integers that are encoded in this way. Additionally, since we are doubling the size of the first binary string, this is still polynomially related to the adjacency matrix representation.  We can then use 11 to delimit the combination of vertices and edges. If we define a function $f(x)$ that will then encode an edge (represented as an integer) in the way mentioned above, we can concatenate the strings, starting with the vertex and followed by the edges, to each other. If we represent edges as being indexed by a variable $i_k$, and a vertex that has been encoded by $f(x)$ as $V$ (for clarity) we will then end up with a string like $V11f(i_1)11f(i_2)11...f(i_k)1111$. Finally, encoding the entire graph will just be the concatenation of all the strings of the above single-vertex representation.
+\textbf{Problem 5.} Starting with the adjacency matrix representation \cite{website:5}, because it is easier, we can use an integer $x$ to represent the number of vertices and encode this integer in the normal way integers are encoded in binary. Following this, there will be $x^2$ bits. The value of bit $y$ will be 1 if there is an edge from vertex $\lfloor m/n \rfloor$ to vertex $m\%n$, and 0 if there is not an edge there.
+
+\hfill
+
+For the adjacency list representation \cite{website:5}, we should use a different encoding for integers that pads each bit with a 0. This will allow us to ensure that the string 11 will never be found in integers that are encoded in this way. Additionally, since we are only doubling the size of the first binary string, this is still polynomially related to the adjacency matrix representation.  We can then use 11 to delimit the combination of vertices and edges. If we define a function $f(x)$ that will then encode an edge (represented as an integer) in the way mentioned above, we can concatenate the strings, starting with the vertex and followed by the edges, to each other. If we represent edges as being indexed by a variable $i_k$, and a vertex that has been encoded by $f(x)$ as $V$ (for clarity) we will then end up with a string like $V11f(i_1)11f(i_2)11...f(i_k)1111$. Finally, encoding the entire graph will just be the concatenation of all the strings of the above single-vertex representation.
+
+\hfill
+
+\textbf{Problem 6.} We begin by showing that ER is in NP. If we have a list of $m, (k < m),$ counselors who are qualified for all the sports, this would suffice as a "yes" answer to ER. We can check the validity of this answer in polynomial time by:
+
+\begin{enumerate}
+    \item Check if $k < m$.
+    \item Then, for each sport $n$, search all $m$ counselors to see if any are qualified for it.
+    \item If we find a counselor for all sports, accept, otherwise reject.
+    \item This runs in $O(mn)$ time, making it an NP problem.
+\end{enumerate}
+
+Next we must show that ER $\leq_P$ of some known NP-complete problem. The following will show that ER $\leq_P$ Set Cover \cite{website:6} \cite{website:7}. If we have an instance $A$ of SC which consists of $n$ subsets $S_1...S_n$ of a set $S = \{ a_1...a_n \}$, we can construct an instance $B$ of ER as follows. For each of the elements $a_n \in S$ we can create a sport $x_i$, and for each subset of $S_j$ we can create a counselor $y_j$. The counselor $y_j$ is qualified for the sport $a_i$ iff $a_i \in S_j$. It is obvious then that this reduction can be performed in polynomial time.
+
+\hfill
+
+Now we can show that there are $k$ subsets in $A$ that cover $S$ iff there are $k$ counselors in $B$ that cover all the sports. If we assume that the $k$ sets $S_{j_1}...S_{j_k}$ cover $S$, we can claim that the corresponding $k$ counselors $c_{j_1}...c_{j_k}$ cover all the sports. Consider any sport $x_i$, the corresponding element $a_i$ must belong to some subset $S_{j_i}$ that contains $a_i$. Then, the counselor $y_i$ is qualified to teach sport $a_i$. 
+
+\hfill
+
+If we also assume that the $k$ counselors $c_{j_1}...c_{j_k}$ cover all the sports, we can claim that the corresponding $k$ subsets $S_{j_1}...S_{j_k}$ cover $S$. Any element $e_i \in S$, corresponding to sport $b_i$ must be covered by some counselor $c_{j_i}$. Then, $S_{j_i}$ contains $e_i$. Thus, ER is NP-complete.
+
+\hfill
+
+\textbf{Problem 7.} First, we can show that \emph{DS} is in NP because, for each customer, we can check all products, and can, in polynomial time, confirm that no two customers purchased the same product. Given a graph $G = (V, E)$, an $m \times n$ array $A$, and a number of customers $k \leq m$, we construct a customer for each node $V$ and a product for each edge $E$. We then build an array of customers $V$ who bought product $E$ iff $E$ is incident on $V$. Finally, we ask whether this array is a \emph{DS} of size $k$. We claim that this holds iff $G$ has an \emph{IS} of size k.
+
+\hfill
+
+If there is a \emph{DS} of size $k$, then the set $V$ has the property that no two $V_i$ are incident to the same $E_j$. Therefore, it is an \emph{IS} of size $k$. Conversely, if it is true that there exists an \emph{IS} of size $k$, then $V$ has the property that no two $V_i$ have anything in common, so it is diverse. Therefore, \emph{DS} is NP-complete.
 
 \newpage
 \bibliography{citation} 
