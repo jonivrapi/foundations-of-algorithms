@@ -44,7 +44,7 @@ $L_3$ can be written as a regular expression in the form $a^*b^*$, therefore thi
 
 \hfill
 
-\textbf{Problem 5.} 
+\textbf{Problem 5.} Starting with the adjacency matrix representation \cite{website:5}, because it is easier, we can use an integer $x$ to represent the number of vertices and encode this integer in the normal way integers are encoded in binary. Following this, there will be $x^2$ bits. The value of bit $y$ will be 1 if there is an edge from vertex $\lfloor m/n \rfloor$ to vertex $m\%n$, and 0 if there is not an edge there. For the adjacency list representation \cite{website:5}, we should use a different encoding for integers that pads each bit with a 0. This will allow us to ensure that the string 11 will never be found in integers that are encoded in this way. Additionally, since we are doubling the size of the first binary string, this is still polynomially related to the adjacency matrix representation.  We can then use 11 to delimit the combination of vertices and edges. If we define a function $f(x)$ that will then encode an edge (represented as an integer) in the way mentioned above, we can concatenate the strings, starting with the vertex and followed by the edges, to each other. If we represent edges as being indexed by a variable $i_k$, and a vertex that has been encoded by $f(x)$ as $V$ (for clarity) we will then end up with a string like $V11f(i_1)11f(i_2)11...f(i_k)1111$. Finally, encoding the entire graph will just be the concatenation of all the strings of the above single-vertex representation.
 
 \newpage
 \bibliography{citation} 
