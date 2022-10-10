@@ -19,7 +19,7 @@
 
 \hfill
 
-\textbf{Problem 1.} We are asked to use indicator random variables to compute the expected value \cite{website:1} of the sum of $n$ dice. First, we figure out the expected value of rolling just one die
+\textbf{Problem 1.} We are asked to use indicator random variables to compute the expected value \cite{website:1} of the sum of $n$ dice. First, we figure out the expected value of rolling just one die:
 
 \begin{gather}
     E[X] = \sum_{i = 1}^{6}iP(X_i) = \frac{1}{6}\sum_{i = 1}^{6}i 
@@ -43,7 +43,7 @@ Then, the sum of $n$ dice has the probability
 
 \hfill
 
-\textbf{Problem 3.} For this problem, I was neither sure what exactly the "basic linear in-place algorithm on the internet" was, nor was I able to figure out a way to improve what I assume are optimal solutions that I did find on the internet. Something I noticed, however, was that all the solutions on the internet use pointers to organize the colors, which I personally find difficult to comprehend. After reading the Bucket Sort section of our Module content, however, I believe a much simpler solution, without pointers, to this problem can be done. 
+\textbf{Problem 3a.} For this problem, I was not sure what exactly the "basic linear in-place algorithm on the internet" was, nor was I able to figure out a way to improve what I assume are optimal solutions that I did find on the internet. Something I noticed, however, was that all the solutions on the internet use pointers to organize the colors, which I personally find difficult to comprehend. After reading the Bucket Sort section of our Module content, however, I believe a much simpler solution, without pointers, to this problem can be achieved. 
 
 If we choose to represent our variables like so (for simplicity of the algorithm) $R \rightarrow 0$, $W \rightarrow 1$, $B \rightarrow 2$, we can construct a solution to this problem with bucket sort like so:
 
@@ -64,13 +64,13 @@ If we choose to represent our variables like so (for simplicity of the algorithm
     \li \Return A
 \end{codebox}
 
-An \emph{in-place} algorithm is an algorithm that does not need extra memory to perform whatever action is required of it, except for any constant amount of memory that is required for its operation, irrespective of input size. For example, some programming languages allow you to swap values in an array without the use of a declared temporary variable. Other languages do not allow you to swap values in an array, mandating the use of a temporary swap variable. With even those languages, however, the compiler is smart enough to recognize that you are doing a swap, and will write the optimal code to do so for you. This bucket sort implementation is therefore an in-place algorithm. It requires only the 'counts' array on line 1 of the program, which is of constant size, to perform the sort.
+An \emph{in-place} algorithm is an algorithm that does not need extra memory to perform whatever action is required of it, except for any constant amount of memory that is required for its operation, irrespective of input size. For example, some programming languages allow you to swap values in an array without the use of a temporary variable. Other languages do not allow you to swap values in an array, mandating the use of a temporary swap variable. With even those languages, however, the compiler is smart enough to recognize that you are doing a swap, and will write the optimal code that does so for you. This bucket sort implementation is therefore an in-place algorithm. It requires only the 'counts' array on line 1 of the program, which is of constant size, to perform the sort.
 
-Asymptotically, there are two loops in this pseudocode which both iterate through every item in $\pmb A$ exactly once. This results in a time complexity of $O(n) + O(n) = O(n)$, keeping this solution to \emph{DNF} linear, as well as in-place.
+\textbf{Problem 3b.} Asymptotically, there are two loops in this pseudocode which both iterate through every item in $\pmb A$ exactly once. This results in a time complexity of $O(n) + O(n) = O(n)$, keeping this solution to \emph{DNF} linear, as well as in-place.
 
 \hfill
 
-\textbf{Problem 4.} My algorithm describes this as a two-step process. First, assuming we have a 2 dimensional array, filled with $k$ sub-arrays, we flatten that array to produce an output array of 1 dimension. Finally, we use heap sort \cite{website:4} with a max-heap to sort the remaining list in descending order. 
+\textbf{Problem 4.} My algorithm describes this as a two-step process. First, assuming we have a 2 dimensional array, filled with $k$ sub-arrays, we flatten that array to produce an output array of 1 dimension. While each $k$ sub-array is sorted, the flattened array is not guaranteed to be sorted. Therefore, we use heap sort \cite{website:4} with a max-heap to sort the remaining list in descending order. 
 
 \begin{codebox}
     \Procname{$\proc{Heapify}(A, n, i)$}
@@ -129,7 +129,7 @@ For the first step, flattening the input array, each element in the 2d array is 
 \end{codebox}
 
 \begin{codebox}
-    \Procname{$\proc{Counting-Sort}(A, n)$}
+    \Procname{$\proc{NSort}(A, n)$}
     \li A = $\proc{Fisher-Yates}(A)$
     \li
     \li counts = new Array(n + 1).fill(0)
@@ -150,7 +150,7 @@ For the first step, flattening the input array, each element in the 2d array is 
     \li \Return sortedArray
 \end{codebox}
 
-There are three loops in $\proc{Counting-Sort}$ and one in $\proc{Fisher-Yates}$, all of which iterate over each element in $A$ exactly once. This makes the total time complexity of the algorithm $O(n) + O(n) + O(n) + O(n) = O(n)$.
+There are three loops in $\proc{NSort}$ and one in $\proc{Fisher-Yates}$, all of which iterate over each element in $A$ exactly once. This makes the total time complexity of the algorithm $O(n) + O(n) + O(n) + O(n) = O(n)$.
 
 \hfill
 
@@ -180,17 +180,37 @@ While BUILD-MAX-HEAP' will produce:
     \end{tikzpicture} 
 \end{center}
 
-From CLRS 6.1 \cite{CLRS} we know that the insertion operation is $O(log(n))$. Since we are doing it $n$ times, we get a bound on the runtime of $O(nlog(n))$.
+From CLRS 6.1 \cite{CLRS} we know that the insertion operation into a heap is $\Theta(log(n))$. Since we are inserting $n$ times, we get a bound on the runtime of $\Theta(nlog(n))$.
 
 \hfill
 
-\textbf{Problem 7.} Solving the array of integers problem: Radix sort takes an array of $n$ integers, in base $b$, where each number as at most $d$ digits and $d = \lfloor log_b(k) + 1 \rfloor$ where $k$ is the largest number in the array. From \cite{website:3} we know that, when $b$ and $n$ are of the same size magnitude, radix sort will run in $O(d(n+b)) = O(n)$ time. 
+\textbf{Problem 7.} Solving the array of integers problem: Radix sort takes an array of $n$ integers, in base $b$, where each number has at most $d$ digits and $d = \lfloor log_b(k) + 1 \rfloor$ where $k$ is the largest number in the array. From \cite{website:3} we know that, when $b$ and $n$ are of the same size magnitude, radix sort will run in $O(d(n+b)) = O(n)$ time. 
 
-First, we go through the array, putting each number in $n$ buckets by number of digits (e.g. [1, 2, 3], [12, 23, 34]...). This takes $O(n)$ steps. The only thing that remains is to sort the numbers within the $n$ buckets. If we assume there are $k_i$ numbers with $i$ digits, then radix will sort these numbers digit by digit in $O(ik_i)$ with $i$ iterations of counting sort over $k_i$ numbers. To sort all the buckets then, we would sum this for $O(\sum ik_i)$. Since we know from the problem that the total number of digits is $n$, we know that $\sum ik_i = n$. Therefore, the total number of steps for the whole algorithm would be $O(n) + O(\sum ik_i) = O(n) + O(n) = O(n)$
+First, we go through the array, putting each number in $n$ buckets by number of digits (e.g. [1, 2, 3], [12, 23, 34]...). This takes $O(n)$ steps. The only thing that remains is to sort the numbers within the $n$ buckets. If we assume there are $k_i$ numbers with $i$ digits, then radix will sort these numbers digit by digit in $O(ik_i)$ with $i$ iterations of counting sort over $k_i$ numbers. To sort all the buckets we would sum this for $O(\sum ik_i)$. Since we know from the problem that the total number of digits is $n$, we know that $\sum ik_i = n$. Therefore, the total number of steps for the whole algorithm would be $O(n) + O(\sum ik_i) = O(n) + O(n) = O(n)$.
 
 \hfill
 
-\textbf{Problem 8.} 
+\textbf{Problem 8a.} Given this random process, the expected number of incoming links to node $v_j$ is as follows
+
+\begin{gather}
+    \sum_{x=j}^{n-1} \frac{1}{x}
+\end{gather}
+
+When $n = 1$, indicating you have just 1 node, this summation does not occur, and the result is 0 incoming links. When $n=2$, indicating you have 2 nodes, the expression evaluates to 1, indicating that node $v_j$ (the first node) has 1 incoming link. When $n=3$, indicating you have 3 nodes, the expression evaluates to 1.5 indicating that node $v_j$ (either node 1 or 2 in this case) has an expected 1.5 incoming links.
+
+In order to express this asymptotically via a tight bound without summations, we can take the indefinite integral of $\frac{1}{x}$.
+
+\begin{gather}
+    \int \frac{1}{x} = ln(x) + c = \Theta(ln(x))
+\end{gather}
+
+\textbf{Problem 8b.} Intuitively, the worst possible organization of this network (or rather, a sub-section of it as it is peer-to-peer and a node may not have to traverse the whole network to get whatever content it needed) would be a "linked list" of nodes, where each node points to the previous node. As this type of network grows, the nodes that came later would experience slower and slower connection speeds because they would be proxying through every node that came before them. Likewise, the best possible configuration would be to arrange nodes in a tree-like structure, keeping the overall depth of the network as shallow as possible while not giving any single node too many incoming connections so as to overload them. In keeping with this intuition, we can write an expression to formulate the expected number of nodes with no incoming connections like so:
+
+\begin{gather}
+    \sum_{j=1}^{n}\prod_{x=j}^{n-1} (1 - \frac{1}{x}) = \frac{n}{2}
+\end{gather}
+
+Here we add a term in front of the $\frac{1}{x}$ to signify that you will always have at least one node with no incoming connections -- in the case where you only have one node. Likewise, we need to sum a series of products which correspond to the probabilities that nodes have incoming connections in order to evaluate this properly. Courtesy of Wolfram Alpha \cite{website:7}, we were able to show that this goes to $\frac{n}{2}$.
 
 
 \newpage
