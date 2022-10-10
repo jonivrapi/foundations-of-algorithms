@@ -43,7 +43,30 @@ Then, the sum of $n$ dice has the probability
 
 \hfill
 
-\textbf{Problem 3.} 
+\textbf{Problem 3.} For this problem, I was neither sure what exactly the "basic linear in-place algorithm on the internet" was, nor was I able to figure out a way to improve what I assume are optimal solutions that I did find on the internet. Something I noticed, however, was that all the solutions on the internet use pointers to organize the colors, which I personally find difficult to comprehend. After reading the Bucket Sort section of our Module content, however, I believe a much simpler solution, without pointers, to this problem can be done. 
+
+If we choose to represent our variables like so (for simplicity of the algorithm) $R \rightarrow 0$, $W \rightarrow 1$, $B \rightarrow 2$, we can construct a solution to this problem with bucket sort like so:
+
+\begin{codebox}
+    \Procname{$\proc{Bucket-Sort-DNF}(A)$}
+    \li counts = [0, 0, 0]
+    \li
+    \li \For item in A \Do
+    \li counts[item]++ \End
+    \li
+    \li \For (item, index) in A \Do
+    \li \If counts[0]$-- >$ 0 \Then
+    \li A[index] = 0
+    \li \ElseIf counts[1]$-- >$ 0 \Then
+    \li A[index] = 1 
+    \li \Else
+    \li A[index] = 2 \End \End
+    \li \Return A
+\end{codebox}
+
+An \emph{in-place} algorithm is an algorithm that does not need extra memory to perform whatever action is required of it, except for any constant amount of memory that is required for its operation, irrespective of input size. For example, some programming languages allow you to swap values in an array without the use of a declared temporary variable. Other languages do not allow you to swap values in an array, mandating the use of a temporary swap variable. With even those languages, however, the compiler is smart enough to recognize that you are doing a swap, and will write the optimal code to do so for you. This bucket sort implementation is therefore an in-place algorithm. It requires only the 'counts' array on line 1 of the program, which is of constant size, to perform the sort.
+
+Asymptotically, there are two loops in this pseudocode which both iterate through every item in $\pmb A$ exactly once. This results in a time complexity of $O(n) + O(n) = O(n)$, keeping this solution to \emph{DNF} linear, as well as in-place.
 
 \hfill
 
