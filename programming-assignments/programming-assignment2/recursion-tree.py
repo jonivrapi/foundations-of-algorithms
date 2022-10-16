@@ -1,40 +1,28 @@
-from enum import Enum 
+from sympy import *
 
-class Node: 
-    def __init__(self, size, nonRecursiveCost) -> None:
-        self.size = size
-        self.nonRecursiveCost = nonRecursiveCost
-
-class AlgorithmType(Enum):
-    DIVIDE_AND_CONQUER = 1
-    CHIP_AND_BE_CONQUERED = 2
-
-class AlgorithmInput:
-    # def __init__(self, type: AlgorithmType, a, b, c, d, e):
-    #     self.type = type
-    #     self.a = a
-    #     self. b = b
-    #     self.c = c
-    #     self.d = d
-    #     self.e = e
-    def __init__(self) -> None:
-        pass
+def divideAndConquor(inA, inB, inC, inD): 
+    a, b, c, d, n = symbols('a b c d n') 
     
-    def askForInput(self) -> None:
-        self.type = int(input('Press 1 for Divide and Conquer, 2 for Chip and Be Conquered: '))
-        self.a = input('Enter a value for a: ')
-        self.b = input('Enter a value for b: ')
-        self.c = input('Enter a value for c: ')
-        self.d = input('Enter a value for d: ')
+    for i in range(4):
+        if (i == 0):
+            recursiveCost = n
 
-    def toString(self) -> None:
-        print(f"Chosen Algorithm type: {AlgorithmType(self.type).name} -> {{ a: {self.a}, b: {self.b}, c: {self.c}, d: {self.d}}}")
-       
+            if (inC == 1 and inD == 1):
+                nonRecursiveCost = 1
+            else: 
+                nonRecursiveCost = (c*n**d).subs([(d, inD)])
 
-# algo_input = int(input("Press 1 for Divide and Conquer, 2 for Chip and Be Conquered: "))
-# print(AlgorithmType(algo_input).name)
+            print(f"At depth {i}, recursive cost is: {recursiveCost}, and non-recursive cost is: {nonRecursiveCost}")
+        else:
+            recursiveCost = (n/(b**i)).subs(b, inB)
 
-algorithmInput = AlgorithmInput()
-algorithmInput.askForInput()
-algorithmInput.toString()
+            if (inC == 1 and inD == 1):
+                nonRecursiveCost = inA ** i
+            else:
+                nonRecursiveCost = (a**i).subs(a, inA)*(c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
+            
+            print(f"At depth {i}, recursive cost is: {recursiveCost}, and non-recursive cost is: {nonRecursiveCost}")
 
+# divideAndConquor(8, 2, 1, 1)
+# divideAndConquor(7, 2, 1, 2)
+divideAndConquor(3, 4, 1, 2)
