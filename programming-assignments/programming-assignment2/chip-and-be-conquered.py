@@ -14,6 +14,7 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
         # starting case
         if i == 0:
             recursiveCost = n
+            numNodes = 1
 
             # when you choose your input for c and d to be zero, i use this to signify the f(n) ter is a constant
             if inC == 0 and inD == 0:
@@ -24,7 +25,8 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
                 nonRecursiveCost = (c*n**d).subs([(c, inC), (d, inD)])
             
             print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print("The number of nodes at this level is: 1\n")
+            print(f"The number of nodes at this level is: {numNodes}")
+            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)} | or in expanded form {expand(numNodes * nonRecursiveCost)}\n")
         # depth > 0 cases
         else:
             #r recursive cost is calculated as n-b*i
@@ -41,7 +43,8 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
         
             
             print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print(f"The number of nodes at this level is: {numNodes}\n")
+            print(f"The number of nodes at this level is: {numNodes}")
+            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)} | or in expanded form: {expand(numNodes * nonRecursiveCost)}\n")
 
 
 
