@@ -16,17 +16,19 @@ def divideAndConquer(inA, inB, inC, inD, message):
         # starting case
         if (i == 0):
             recursiveCost = n
+            numNodes = 1
 
             # When you choose your input for c and d to be zero, I use this to signify that the f(n) term is a constant
             if (inC == 0 and inD == 0):
-                # If c = 0 and d = 0 are chose, f(n) is a constant starting at 1
+                # If c = 0 and d = 0 are chose, f(n) is a constant 1
                 nonRecursiveCost = 1
             else: 
                 # The non recursive cost is calculated as cn^d
-                nonRecursiveCost = (c*n**d).subs([(d, inD)])
+                nonRecursiveCost = (c*n**d).subs([(c, inC), (d, inD)])
 
             print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print("The number of nodes at this level is: 1\n")
+            print("The number of nodes at this level is: 1")
+            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)}\n")
         # depth > 0 cases
         else:
             # recursive cost is calculated as n/(b^i)
@@ -35,14 +37,15 @@ def divideAndConquer(inA, inB, inC, inD, message):
             numNodes = (a**i).subs(a, inA)
 
             if (inC == 0 and inD == 0):
-                # outside of the starting case, when referring to a constant f(n), the non-recursive cost is calculated as a^i where i is current depth of tree
-                nonRecursiveCost = inA ** i
+                # If c = 0 and d = 0 are chose, f(n) is a constant 1
+                nonRecursiveCost = 1
             else:
                 # otherwise it is calculated as the number of nodes * c*recursiveCost^d
-                nonRecursiveCost = numNodes*(c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
+                nonRecursiveCost = (c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
             
             print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print(f"The number of nodes at this level is: {numNodes}\n")
+            print(f"The number of nodes at this level is: {numNodes}")
+            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)}\n")
     
 
 divideAndConquer(8, Rational(2), Rational(0), Rational(0), 'Equation 4.9 on page 84')
