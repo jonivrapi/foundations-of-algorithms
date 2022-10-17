@@ -32,6 +32,7 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
             # number of nodes at a level is calculated as a^i where i is the current depth of the tree
             numNodes = (a**i).subs(a, inA)
 
+            # when you choose your input for c and d to be zero, i use this to signify the f(n) ter is a constant
             if inC == 0 and inD == 0:
                 # If c = 0 and d = 0 are chose, f(n) is a constant 1
                 nonRecursiveCost = 1
