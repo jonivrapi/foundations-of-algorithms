@@ -1,13 +1,12 @@
 from sympy import *
+from utils import *
 
 def divideAndConquer(inA, inB, inC, inD, message):
     # i specifically do not check for c being strictly > 0 because i use the combination of c and d as zero to indicate that its a constant function
     if inA < 1 or inB <= 1 or not isinstance(inB, Rational) or inC < 0 or inD < 0 or not isinstance(inC, Rational) or not isinstance(inD, Rational):
         raise ValueError("Your parameters do not fit the criteria")
 
-    print(message)
-    print(f"Parameters chosen: {{ a: {inA}, b: {inB}, c: {inC}, d: {inD} }}")
-    print('----------------------------')
+    printMessageAndParameters(message, inA, inB, inC, inD)
     
     # Declare symbols for each variable
     a, b, c, d, n = symbols('a b c d n') 
@@ -26,9 +25,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
                 # The non recursive cost is calculated as cn^d
                 nonRecursiveCost = (c*n**d).subs([(c, inC), (d, inD)])
 
-            print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print("The number of nodes at this level is: 1")
-            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)}\n")
+            printResults(i, recursiveCost, nonRecursiveCost, numNodes)
         # depth > 0 cases
         else:
             # recursive cost is calculated as n/(b^i)
@@ -43,9 +40,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
                 # otherwise it is calculated as the number of nodes * c*recursiveCost^d
                 nonRecursiveCost = (c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
             
-            print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
-            print(f"The number of nodes at this level is: {numNodes}")
-            print(f"The total nonrecursive cost at this level is {simplify(numNodes * nonRecursiveCost)}\n")
+            printResults(i, recursiveCost, nonRecursiveCost, numNodes)
     
 
 divideAndConquer(8, Rational(2), Rational(0), Rational(0), 'Equation 4.9 on page 84')
