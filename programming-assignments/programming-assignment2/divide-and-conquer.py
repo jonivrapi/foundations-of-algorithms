@@ -6,7 +6,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
         raise ValueError("Your parameters do not fit the criteria")
 
     print(message)
-    print(f"Parameters chosen: {{ a: {inA}, b: {inB}, c: {inC}, d: {inD}}}")
+    print(f"Parameters chosen: {{ a: {inA}, b: {inB}, c: {inC}, d: {inD} }}")
     print('----------------------------')
     
     # Declare symbols for each variable
@@ -25,8 +25,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
                 # The non recursive cost is calculated as cn^d
                 nonRecursiveCost = (c*n**d).subs([(d, inD)])
 
-            print(f"At depth {i}, recursive cost is: {recursiveCost}, and non-recursive cost is: {nonRecursiveCost}")
-            print(f"The complete node form is: {inA}T({recursiveCost}) + {nonRecursiveCost}")
+            print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
             print("The number of nodes at this level is: 1\n")
         # depth > 0 cases
         else:
@@ -42,8 +41,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
                 # otherwise it is calculated as the number of nodes * c*recursiveCost^d
                 nonRecursiveCost = numNodes*(c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
             
-            print(f"At depth {i}, recursive cost is: {recursiveCost}, and non-recursive cost is: {nonRecursiveCost}")
-            print(f"The complete node form is: {inA}T({recursiveCost}) + {nonRecursiveCost}")
+            print(f"At depth {i}, The complete node form is: [T({recursiveCost}) | {nonRecursiveCost}]")
             print(f"The number of nodes at this level is: {numNodes}\n")
     
 
