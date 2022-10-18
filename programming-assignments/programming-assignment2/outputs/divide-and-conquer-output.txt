@@ -1,0 +1,56 @@
+Equation 4.9 on page 84
+Parameters chosen: { a: 8, b: 2, c: 0, d: 0 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | 1]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is 1 | or in expanded form 1
+
+At depth 1, The complete node form is: [T(n/2) | 1]
+The number of nodes at this level is: 8
+The total nonrecursive cost at this level is 8 | or in expanded form 8
+
+At depth 2, The complete node form is: [T(n/4) | 1]
+The number of nodes at this level is: 64
+The total nonrecursive cost at this level is 64 | or in expanded form 64
+
+At depth 3, The complete node form is: [T(n/8) | 1]
+The number of nodes at this level is: 512
+The total nonrecursive cost at this level is 512 | or in expanded form 512
+
+Equation 4.10 on page 86
+Parameters chosen: { a: 7, b: 2, c: 1, d: 2 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | n**2]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is n**2 | or in expanded form n**2
+
+At depth 1, The complete node form is: [T(n/2) | n**2/4]
+The number of nodes at this level is: 7
+The total nonrecursive cost at this level is 7*n**2/4 | or in expanded form 7*n**2/4
+
+At depth 2, The complete node form is: [T(n/4) | n**2/16]
+The number of nodes at this level is: 49
+The total nonrecursive cost at this level is 49*n**2/16 | or in expanded form 49*n**2/16
+
+At depth 3, The complete node form is: [T(n/8) | n**2/64]
+The number of nodes at this level is: 343
+The total nonrecursive cost at this level is 343*n**2/64 | or in expanded form 343*n**2/64
+
+Figure 4.1 on page 96
+Parameters chosen: { a: 3, b: 4, c: 1, d: 2 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | n**2]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is n**2 | or in expanded form n**2
+
+At depth 1, The complete node form is: [T(n/4) | n**2/16]
+The number of nodes at this level is: 3
+The total nonrecursive cost at this level is 3*n**2/16 | or in expanded form 3*n**2/16
+
+At depth 2, The complete node form is: [T(n/16) | n**2/256]
+The number of nodes at this level is: 9
+The total nonrecursive cost at this level is 9*n**2/256 | or in expanded form 9*n**2/256
+
+At depth 3, The complete node form is: [T(n/64) | n**2/4096]
+The number of nodes at this level is: 27
+The total nonrecursive cost at this level is 27*n**2/4096 | or in expanded form 27*n**2/4096

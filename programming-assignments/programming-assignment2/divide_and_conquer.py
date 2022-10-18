@@ -11,7 +11,9 @@ def divideAndConquer(inA, inB, inC, inD, message):
     # Declare symbols for each variable
     a, b, c, d, n = symbols('a b c d n') 
     
+    iterationCount = 0
     for i in range(4):
+        iterationCount += 1
         # starting case
         if (i == 0):
             recursiveCost = n
@@ -42,6 +44,7 @@ def divideAndConquer(inA, inB, inC, inD, message):
                 nonRecursiveCost = (c*(recursiveCost**d)).subs([(c, inC), (d, inD)])
             
             printResults(i, recursiveCost, nonRecursiveCost, numNodes)
+    return iterationCount
     
 
 divideAndConquer(8, Rational(2), Rational(0), Rational(0), 'Equation 4.9 on page 84')

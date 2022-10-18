@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
+\usepackage{a4wide}
+
+\title{Programming Assignment 2}
+\author{Joni Vrapi}
+\date{10/17/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\hfill
+
+\textbf{Problem (a).}
+
+\begin{codebox}
+    \Procname{$\proc{Divide-And-Conquer}(a, b, c, d)$}
+    \li \If $a < 1 \lor b <= 1 \lor c < 0 \lor d < 0 \lor \{b,c,d\} \not \in \mathbb{Q}$ \Then
+    \li throw Error \End
+    \li var a, b, c, d, n
+    \li \For i in [1...4] \Do
+    \li \If $i == 0$ \Then
+        \li recursiveCost = n
+        \li numNodes = 1
+        \li \If $c == 0 \land d == 0$ \Then
+            \li nonRecursiveCost = 1
+            \li \Else 
+            \li nonRecursiveCost = $cn^d$ \End
+        \li printResults()
+        \li \Else
+        \li recursiveCost = $\frac{n}{b^i}$
+        \li numNodes = $a^i$
+        \li \If $c == 0 \land d == 0$ \Then
+            \li nonRecursiveCost = 1
+            \li \Else 
+            \li nonRecursiveCost = $c(recursiveCost^d)$ \End
+            \li printResults()
+        \li \End
+        \li \End
+\end{codebox}
+
+\hfill
+
+\begin{codebox}
+    \Procname{$\proc{Chip-And-Be-Conquered}(a, b, c, d)$}
+    \li \If $a < 1 \lor b <= 1 \lor c < 0 \lor d < 0 \lor \{c,d\} \not \in \mathbb{Q} \lor \{a,b\} \not \in \mathbb{Z}$ \Then
+    \li throw Error \End
+    \li var a, b, c, d, n
+    \li \For i in [1...4] \Do
+    \li \If $i == 0$ \Then
+        \li recursiveCost = n
+        \li numNodes = 1
+        \li \If $c == 0 \land d == 0$ \Then
+            \li nonRecursiveCost = 1
+            \li \Else 
+            \li nonRecursiveCost = $cn^d$ \End
+        \li printResults()
+        \li \Else
+        \li recursiveCost = $n - b*i$
+        \li numNodes = $a^i$
+        \li \If $c == 0 \land d == 0$ \Then
+            \li nonRecursiveCost = 1
+            \li \Else 
+            \li nonRecursiveCost = $c(n - b*i)$ \End
+            \li printResults()
+        \li \End
+        \li \End
+\end{codebox}
+
+\textbf{Problem (b).} The worst case asymptotic running time for both of these recursion tree generator functions is $O(n)$. This is due to the fact that there is a single loop in each implementation, iterating exactly 4 times. Each mathematical calculation within the loop can be executed in $O(1)$ time. $3*O(1) * O(n) = O(n)$.
+
+\hfill
+
+\textbf{Problem (c).} The asymptotic running time of both algorithms is exactly the same, and remains so regardless of how you vary either the inputs or even the depth (number of iterations of the loop).
+
+\hfill
+
+\textbf{Analysis.} After running the \emph{tests.py} file as described in the README.md file, you will see that the produced output in terms of iterations stays exactly at 4. If we were to also vary the depth of the tree that is generated (against your instructions), we would see that this algorithm remains linear, even though I severely varied the Rationals, as well as other inputs into both functions. This was expected as per the asymptotic analysis performed above. 
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 

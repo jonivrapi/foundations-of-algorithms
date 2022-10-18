@@ -10,7 +10,9 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
     
     a, b, c, d, n = symbols('a b c d n') 
     
+    iterationCount = 0
     for i in range(4):
+        iterationCount += 1
         # starting case
         if i == 0:
             recursiveCost = n
@@ -42,6 +44,7 @@ def chipAndBeConquered(inA, inB, inC, inD, message):
         
             
             printResults(i, recursiveCost, nonRecursiveCost, numNodes)
+    return iterationCount
 
 
 

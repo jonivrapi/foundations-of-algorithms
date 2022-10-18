@@ -1,0 +1,77 @@
+Test 1
+Parameters chosen: { a: 56, b: 19, c: 2, d: 9/7 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | 2*n**(9/7)]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is 2*n**(9/7) | or in expanded form 2*n**(9/7)
+
+At depth 1, The complete node form is: [T(n - 19) | 2*(n - 19)**(9/7)]
+The number of nodes at this level is: 56
+The total nonrecursive cost at this level is 112*(n - 19)**(9/7) | or in expanded form 112*n*(n - 19)**(2/7) - 2128*(n - 19)**(2/7)
+
+At depth 2, The complete node form is: [T(n - 38) | 2*(n - 38)**(9/7)]
+The number of nodes at this level is: 3136
+The total nonrecursive cost at this level is 6272*(n - 38)**(9/7) | or in expanded form 6272*n*(n - 38)**(2/7) - 238336*(n - 38)**(2/7)
+
+At depth 3, The complete node form is: [T(n - 57) | 2*(n - 57)**(9/7)]
+The number of nodes at this level is: 175616
+The total nonrecursive cost at this level is 351232*(n - 57)**(9/7) | or in expanded form 351232*n*(n - 57)**(2/7) - 20020224*(n - 57)**(2/7)
+
+Test 2
+Parameters chosen: { a: 27, b: 11, c: 31/10, d: 12/7 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | 31*n**(12/7)/10]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is 31*n**(12/7)/10 | or in expanded form 31*n**(12/7)/10
+
+At depth 1, The complete node form is: [T(n - 11) | 31*(n - 11)**(12/7)/10]
+The number of nodes at this level is: 27
+The total nonrecursive cost at this level is 837*(n - 11)**(12/7)/10 | or in expanded form 837*n*(n - 11)**(5/7)/10 - 9207*(n - 11)**(5/7)/10
+
+At depth 2, The complete node form is: [T(n - 22) | 31*(n - 22)**(12/7)/10]
+The number of nodes at this level is: 729
+The total nonrecursive cost at this level is 22599*(n - 22)**(12/7)/10 | or in expanded form 22599*n*(n - 22)**(5/7)/10 - 248589*(n - 22)**(5/7)/5
+
+At depth 3, The complete node form is: [T(n - 33) | 31*(n - 33)**(12/7)/10]
+The number of nodes at this level is: 19683
+The total nonrecursive cost at this level is 610173*(n - 33)**(12/7)/10 | or in expanded form 610173*n*(n - 33)**(5/7)/10 - 20135709*(n - 33)**(5/7)/10
+
+Test 3
+Parameters chosen: { a: 56, b: 80/7, c: 2, d: 9/7 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | 2*n**(9/7)]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is 2*n**(9/7) | or in expanded form 2*n**(9/7)
+
+At depth 1, The complete node form is: [T(7*n/80) | 7*200000**(1/7)*7**(2/7)*n**(9/7)/800]
+The number of nodes at this level is: 56
+The total nonrecursive cost at this level is 49*200000**(1/7)*7**(2/7)*n**(9/7)/100 | or in expanded form 49*200000**(1/7)*7**(2/7)*n**(9/7)/100
+
+At depth 2, The complete node form is: [T(49*n/6400) | 49*4000**(1/7)*7**(4/7)*n**(9/7)/128000]
+The number of nodes at this level is: 3136
+The total nonrecursive cost at this level is 2401*4000**(1/7)*7**(4/7)*n**(9/7)/2000 | or in expanded form 2401*4000**(1/7)*7**(4/7)*n**(9/7)/2000
+
+At depth 3, The complete node form is: [T(343*n/512000) | 343*7**(6/7)*80**(1/7)*n**(9/7)/20480000]
+The number of nodes at this level is: 175616
+The total nonrecursive cost at this level is 117649*7**(6/7)*80**(1/7)*n**(9/7)/40000 | or in expanded form 117649*7**(6/7)*80**(1/7)*n**(9/7)/40000
+
+Test 4
+Parameters chosen: { a: 27, b: 11/6, c: 31/10, d: 12/7 }
+----------------------------
+At depth 0, The complete node form is: [T(n) | 31*n**(12/7)/10]
+The number of nodes at this level is: 1
+The total nonrecursive cost at this level is 31*n**(12/7)/10 | or in expanded form 31*n**(12/7)/10
+
+At depth 1, The complete node form is: [T(6*n/11) | 93*11**(2/7)*6**(5/7)*n**(12/7)/605]
+The number of nodes at this level is: 27
+The total nonrecursive cost at this level is 2511*11**(2/7)*6**(5/7)*n**(12/7)/605 | or in expanded form 2511*11**(2/7)*6**(5/7)*n**(12/7)/605
+
+At depth 2, The complete node form is: [T(36*n/121) | 3348*11**(4/7)*6**(3/7)*n**(12/7)/73205]
+The number of nodes at this level is: 729
+The total nonrecursive cost at this level is 2440692*11**(4/7)*6**(3/7)*n**(12/7)/73205 | or in expanded form 2440692*11**(4/7)*6**(3/7)*n**(12/7)/73205
+
+At depth 3, The complete node form is: [T(216*n/1331) | 120528*11**(6/7)*6**(1/7)*n**(12/7)/8857805]
+The number of nodes at this level is: 19683
+The total nonrecursive cost at this level is 2372352624*11**(6/7)*6**(1/7)*n**(12/7)/8857805 | or in expanded form 2372352624*11**(6/7)*6**(1/7)*n**(12/7)/8857805
+
+Test 1: 4, Test 2: 4, Test 3: 4, Test 4: 4
