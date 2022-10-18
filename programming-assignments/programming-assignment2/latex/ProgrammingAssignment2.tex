@@ -17,7 +17,7 @@
 
 \hfill
 
-\textbf{Problem (a).}
+\textbf{Problem (a).} Both of these algorithms extend the implementation of \emph{ImprovedRecursionTree} in order to compute the depth of the recursion tree in linear time. At each depth level of the tree, signified by an iteration of each function's main for-loop, the recursive cost, and non-recursive cost at a node is computed. The total non-recursive cost at each depth is then computed by multiplying across all nodes at that depth. A slight quirk in both algorithms, in order to handle constant time non-recursive costs, is that when they receive zero as an input for both $c$ and $d$, they assume that the non-recursive cost is a constant time operation. 
 
 \begin{codebox}
     \Procname{$\proc{Divide-And-Conquer}(a, b, c, d)$}
