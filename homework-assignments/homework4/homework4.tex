@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
+\usepackage{tikz}
+\usepackage{bm}
+
+\title{Homework 3}
+\author{Joni Vrapi}
+\date{10/22/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\hfill
+
+\textbf{Problem 1.} Since this algorithm is recursive, we can prove its time complexity by first writing a recurrence relation that describes it, and then solving that recurrence relation. Recurrence relations take the form 
+
+\begin{gather}
+    T(n) = aT(\frac{n}{b}) + f(n)
+\end{gather}
+
+where $a$ is the number of recursive calls, $\frac{n}{b}$ is the size of each sub problem, and $f(n)$ is the non-recursive work done on each call. In this function, there are 2 recursive calls of size $\frac{n}{2}$ and a constant amount of work done at each call, therefore, we  can write the recurrence relation for this problem as 
+
+\begin{gather}
+    T(n) = 2T(\frac{n}{2}) + O(1)
+\end{gather}
+
+Solving this recurrence relation by the Master theorem \cite{website:1}, we get $n^{log_b a} = n$ is asymptotically larger than a constant factor, so case 1 of the Master theorem gives
+
+\begin{gather}
+    T(n) = \Theta(n^{log_b a}) = \Theta(n)
+\end{gather}
+
+\hfill
+
+\textbf{Problem 2a.} An AVL tree \cite{website:2} was the first type of balanced binary search tree invented. Each node has at most 2 children, where the left child is less than the parent, which is less than the right child. 
+
+\begin{codebox}
+    \Procname{\proc{AVL-Search}(Node N, a, b)}
+    \li \If N == null \Then
+    \li \Return false \End
+    \li \If $N.x \geq a$ and $N.x \leq b$ \Then
+    \li \Return true
+    \li \Else 
+    \li \If $b < N.x$ \Then
+    \li \Return \proc{AVL-Search}(N.left, a, b) \End
+    \li \If $a > N.x$ \Then
+    \li \Return \proc{AVL-Search}(N.right, a, b) \End
+    \li \End
+\end{codebox}
+
+\textbf{Problem 2b.} Since, at every level of the tree that is being searched, we eliminate half of the nodes, we check only $log(n)$ nodes, giving this algorithm a time complexity of $O(log(n))$.
+
+\textbf{Problem 2c.} This algorithm will recurse through the nodes of the tree until it reaches the bottom, where if it does not find a node that meets the condition set on line 3 of the pseudocode above, the condition on line 1 is triggered. It then returns false as requested in part A of this problem.
+
+\hfill
+
+\textbf{Problem 3.} If we were to re-write \proc{Counting-Sort} as described, it would still work properly (in that we would still get a sorted array), except that like elements taken later would receive a higher index than those taken earlier, making it unstable. Take the example of $A = [1_1, 2, 1_2]$:
+
+\begin{itemize}
+    \item $n = 3$ and $k = 2$ in this example.
+    \item For loop on line 2 initializes C with all zeros.
+    \item For loop on line 4 transforms C to $[0, 2, 1]$.
+    \item For loop on line 7 transforms C to be $[0, 2, 3]$.
+    \item For loop on line 11 transforms B to be $[0, 1_1, 0] \implies [0, 1_1, 2] \implies [1_2, 1_1, 2]$.
+\end{itemize}
+
+As you can see, the modified algorithm is not stable because the $1_1$ and $1_2$ are out of order relative how they showed up in $A$ originally. Rewriting the modified algorithm like so would maintain the proper index ordering:
+
+\begin{codebox}
+    \Procname{\proc{Counting-Sort}(A, n, k)}
+    \li initialize B[1: n] and C[0: k] as new arrays
+    \li \For $i = 0$ to $k$ \Do
+    \li C[i] = 0 \End
+    \li \For $j = 1$ to $n$ \Do
+    \li C[A[j]] = C[A[j]] + 1 \End
+    \li \For $i = 1$ to $k$ \Do
+    \li C[i] = C[i] + C[i - 1] \End
+    \li \For $j = n$ to 1 \Do
+    \li B[C[A[j]]] = A[j]
+    \li C[A[j]] = C[A[j]] - 1 \End
+    \li \Return B
+\end{codebox}
+
+\hfill
+
+\textbf{Problem 4.} For this problem, I was not sure how to begin, so I referenced \cite{website:3}.
+
+\hfill
+
+\textbf{Problem 4a.} The algorithm will still work in groups of 7 because we know that the median of medians is less than at least 4 elements from half of the $\lceil \frac{n}{7} \rceil$ groups, so it is greater than, as well as less than, $\frac{4n}{14}$ of the elements. Therefore it is never being called recursively on more than $\frac{10n}{14}$ elements. So we have $T(n) \leq T(\frac{n}{7}) + T(\frac{10n}{14}) + O(n)$. By substitution we can show linearity. If $T(n) < cn$ for $n < k$, then for $m \geq k$, $T(\frac{m}{7}) + T(\frac{10m}{14}) + O(m) \leq cm(\frac{1}{7} + \frac{10}{14}) + O(m)$. Basically, what this says is that as long as the constant that is inside the Big-Oh notation is less than $\frac{c}{7}$, this will run linearly. 
+
+\hfill
+
+\textbf{Problem 4b.} Taking the same approach for groups of 3, we have the recurrence $T(n) = T(\lceil \frac{n}{3} \rceil) + T(\frac{4n}{6}) + O(n) \geq T(\frac{n}{3}) + T(\frac{2n}{3}) + O(n)$. To show it is $\geq cnlog(n)$ we have $T(m) \geq c(\frac{m}{3})log(\frac{m}{3}) + c(\frac{2m}{3})log(\frac{2m}{3}) + O(m) \geq cmlog(m) + O(m)$, so it grows more quickly than $O(n)$.
+
+\hfill
+
+\textbf{Problem 7a.} If we say $W = \{1, 2, 2, 1\}$ and $K = 2$, we can see by this algorithm that there will be 4 trucks needed to haul away these containers. This is due to the fact that the example greedy algorithm simply takes the first available container and puts it on the first available truck, filling them up in-order as much as possible, before moving on to a new truck. However, it is obvious looking at the set $W$ that if the containers were instead ordered like $W = \{1, 1, 2, 2\}$, we would only need 3 trucks to move all the containers.
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 
