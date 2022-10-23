@@ -114,7 +114,13 @@ As you can see, the modified algorithm is not stable because the $1_1$ and $1_2$
 
 \hfill
 
-\textbf{Problem 7b.} 
+\textbf{Problem 7b.} If we define the total weights of all containers as $\sum_{i=1}^{n} w_i$, then the number of trucks needed to carry all these containers is 
+
+\begin{gather}
+    \lceil \frac{\sum_{i=1}^{n} w_i}{K} \rceil
+\end{gather}
+
+The example above, $W = \{1, 2, 2, 1\}$ and $K = 2$, requires 4 trucks using the algorithm, and 3 at a minimum. Likewise, we can sort it to $W = \{1, 1, 2, 2\}$ and we require only 3 trucks from the algorithm, and 3 at a minimum. If we had $W = \{1, 2, 1, 2, 1\}$ and $K = 2$, we would need 5 trucks per the algorithm, and 4 trucks at a minimum. From (4) we see that this is always going to be within 1 of the minimum number of trucks, and that falls within a factor of 2, answering this question.
 
 \newpage
 \bibliography{citation} 
