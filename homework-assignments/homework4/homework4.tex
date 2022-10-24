@@ -116,19 +116,23 @@ The following algorithm will run in $O(n^2)$ time as it takes a constant amount 
     \li OPTIMAL[0] = 0
     \li \For i from 1 to min(A.length, 3) \Do
     \li OPTIMAL[i] = OPTIMAL[i-1] + r*A[i]
+    \li
     \li \For j from 1 to i - 1 \Do
     \li SCHEDULE[i][j] = SCHEDULE[i-1][j] \End
     \li SCHEDULE[i][i] = 'A' \End
     \li
     \li \For i from 4 to A.length \Do
     \li OPTIMAL[i] = min(OPTIMAL[i-1] + r*A[i], OPTIMAL[i-4] + 4c)
+    \li
     \li \If OPTIMAL[i-1] + r*A[i] < OPTIMAL[i-4] + 4c \Then
     \li \For j from 1 to i - 1 \Do
     \li SCHEDULE[i][j] = SCHEDULE[i-1][j] \End
+    \li
     \li SCHEDULE[i][i] = 'A' 
     \li \Else
     \li \For j from 1 to i-4 \Do
     \li SCHEDULE[i][j] = SCHEDULE[i-4][j] \End
+    \li
     \li SCHEDULE[i][i-3] = SCHEDULE[i][i-2] = SCHEDULE[i][i-1] = SCHEDULE[i][i] = 'B' \End
 \end{codebox}
 
