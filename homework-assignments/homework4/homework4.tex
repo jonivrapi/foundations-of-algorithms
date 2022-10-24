@@ -102,7 +102,35 @@ As you can see, the modified algorithm is not stable because the $1_1$ and $1_2$
 
 \hfill
 
-\textbf{Problem 5.}
+\textbf{Problem 5.} If we define $OPTIMAL(i)$ as the minimum cost of a solution for weeks 1 through $i$, we can say that, in the $i$th week, we either use company A or company B. To define this recursively, we know that when using company A, we pay $r*ws_i$ and are optimal through week $i-1$, and when using company B, we pay $4c$ and are optimal through week $i-4$. We can then define the recursion as $OPTIMAL(i) = min(r*ws_i + OPTIMAL(i - 1), 4c + OPTIMAL(i - 4))$. Finally, for $i < 4$ we have to choose $OPTIMAL(0) = 0$ and $OPTIMAL(i) = r*ws_i + OPTIMAL(i)$.
+
+\hfill
+
+The following algorithm will run in $O(n^2)$ time as it takes a constant amount of time to compute $OPTIMAL(i)$, and since we use a 2d array to store the most efficient schedule which requires $n^2$ iterations, we result in an $O(n^2)$ time. 
+
+\begin{codebox}
+    \Procname{\proc{Shipping-Schedule}(A, r, c)}
+    \li SCHEDULE[1...A.length][1...A.length]
+    \li OPTIMAL[0...A.length]
+    \li
+    \li OPTIMAL[0] = 0
+    \li \For i from 1 to min(A.length, 3) \Do
+    \li OPTIMAL[i] = OPTIMAL[i-1] + r*A[i]
+    \li \For j from 1 to i - 1 \Do
+    \li SCHEDULE[i][j] = SCHEDULE[i-1][j] \End
+    \li SCHEDULE[i][i] = 'A' \End
+    \li
+    \li \For i from 4 to A.length \Do
+    \li OPTIMAL[i] = min(OPTIMAL[i-1] + r*A[i], OPTIMAL[i-4] + 4c)
+    \li \If OPTIMAL[i-1] + r*A[i] < OPTIMAL[i-4] + 4c \Then
+    \li \For j from 1 to i - 1 \Do
+    \li SCHEDULE[i][j] = SCHEDULE[i-1][j] \End
+    \li SCHEDULE[i][i] = 'A' 
+    \li \Else
+    \li \For j from 1 to i-4 \Do
+    \li SCHEDULE[i][j] = SCHEDULE[i-4][j] \End
+    \li SCHEDULE[i][i-3] = SCHEDULE[i][i-2] = SCHEDULE[i][i-1] = SCHEDULE[i][i] = 'B' \End
+\end{codebox}
 
 \hfill
 
