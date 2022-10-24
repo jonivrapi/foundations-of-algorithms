@@ -94,7 +94,7 @@ As you can see, the modified algorithm is not stable because the $1_1$ and $1_2$
 
 \hfill
 
-\textbf{Problem 4a.} The algorithm will still work in groups of 7 because we know that the median of medians is less than at least 4 elements from half of the $\lceil \frac{n}{7} \rceil$ groups, so it is greater than, as well as less than, $\frac{4n}{14}$ of the elements. Therefore it is never being called recursively on more than $\frac{10n}{14}$ elements. So we have $T(n) \leq T(\frac{n}{7}) + T(\frac{10n}{14}) + O(n)$. By substitution we can show linearity. If $T(n) < cn$ for $n < k$, then for $m \geq k$, $T(\frac{m}{7}) + T(\frac{10m}{14}) + O(m) \leq cm(\frac{1}{7} + \frac{10}{14}) + O(m)$. Basically, what this says is that as long as the constant that is inside the Big-Oh notation is less than $\frac{c}{7}$, this will run linearly. 
+\textbf{Problem 4a.} The algorithm will still work in groups of 7 because we know that the median of medians is less than at least 4 elements from half of the $\lceil \frac{n}{7} \rceil$ groups, so it is greater than, as well as less than, $\frac{4n}{14}$ of the elements. Therefore, it is never being called recursively on more than $\frac{10n}{14}$ elements. So we have $T(n) \leq T(\frac{n}{7}) + T(\frac{10n}{14}) + O(n)$. By substitution, we can show linearity. If $T(n) < cn$ for $n < k$, then for $m \geq k$, $T(\frac{m}{7}) + T(\frac{10m}{14}) + O(m) \leq cm(\frac{1}{7} + \frac{10}{14}) + O(m)$. Basically, what this says is that as long as the constant that is inside the Big-Oh notation is less than $\frac{c}{7}$, this will run linearly. 
 
 \hfill
 
@@ -102,7 +102,7 @@ As you can see, the modified algorithm is not stable because the $1_1$ and $1_2$
 
 \hfill
 
-\textbf{Problem 5.} If we define $OPTIMAL(i)$ as the minimum cost of a solution for weeks 1 through $i$, we can say that, in the $i$th week, we either use company A or company B. To define this recursively, we know that when using company A, we pay $r*ws_i$ and are optimal through week $i-1$, and when using company B, we pay $4c$ and are optimal through week $i-4$. We can then define the recursion as $OPTIMAL(i) = min(r*ws_i + OPTIMAL(i - 1), 4c + OPTIMAL(i - 4))$. Finally, for $i < 4$ we have to choose $OPTIMAL(0) = 0$ and $OPTIMAL(i) = r*ws_i + OPTIMAL(i)$.
+\textbf{Problem 5.} If we define $OPTIMAL(i)$ \cite{website:4} \cite{website:5} as the minimum cost of a solution for weeks 1 through $i$, we can say that, in the $i$th week, we either use company A or company B. To define this recursively, we know that when using company A, we pay $r*ws_i$ and are optimal through week $i-1$, and when using company B, we pay $4c$ and are optimal through week $i-4$. We can then define the recursion as $OPTIMAL(i) = min(r*ws_i + OPTIMAL(i - 1), 4c + OPTIMAL(i - 4))$. Finally, for $i < 4$ we have to choose $OPTIMAL(0) = 0$ and $OPTIMAL(i) = r*ws_i + OPTIMAL(i)$.
 
 \hfill
 
