@@ -138,7 +138,36 @@ The following algorithm will run in $O(n^2)$ time as it takes a constant amount 
 
 \hfill
 
-\textbf{Problem 6.} 
+\textbf{Problem 6.} From \cite{website:6} we can see that we can define the following function recursively for $0 \leq j \leq n$:
+
+\begin{gather}
+    OPT(0) = 0 \\
+    1 \leq k \leq j \implies OPT(j) = max(OPT(k-1) + quality(y_k...y_j))
+\end{gather}
+
+\begin{codebox}
+    \Procname{\proc{Segmentation}(String s)}
+    \li SPLITS = [s.length + 1].fill(0)
+    \li OPT = [s.length + 1].fill(0)
+    \li
+    \li \For j = 1 to s.length \Do
+    \li tempOPT = 0
+    \li \For k = 1 to $k \leq j$ \Do
+    \li \If $OPT[k-1] + quality(s.substring(k-1, j)) > tempOPT$ \Then
+    \li tempOPT = OPT[k-1] + quality(s.substring(k-1, j))
+    \li SPLITS[j] = k - 1 \End \End
+    \li OPT[j] = tempOPT
+    \li
+    \li lastSplit = SPLITS[SPLITS.length - 1]
+    \li numberOfSplits = 0
+    \li
+    \li \While (lastSplit != 0) \Do
+    \li numberOfSplits++
+    \li lastSplit = SPLITS[lastSplit] \End
+    \li
+    \li \If $numberOfSplits \leq 0$ \Then 
+    \li \Return "Dont Split anywhere" \End
+\end{codebox}
 
 \hfill
 
