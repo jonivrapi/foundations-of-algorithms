@@ -155,19 +155,23 @@ The following algorithm will run in $O(n^2)$ time as it takes a constant amount 
     \li \For k = 1 to $k \leq j$ \Do
     \li \If $OPT[k-1] + quality(s.substring(k-1, j)) > tempOPT$ \Then
     \li tempOPT = OPT[k-1] + quality(s.substring(k-1, j))
-    \li SPLITS[j] = k - 1 \End \End
-    \li OPT[j] = tempOPT
+    \li SPLITS[j] = k - 1 \End \End 
+    \li OPT[j] = tempOPT \End
+    \li print("Max Val: " + OPT[s.length])
     \li
     \li lastSplit = SPLITS[SPLITS.length - 1]
     \li numberOfSplits = 0
     \li
     \li \While (lastSplit != 0) \Do
     \li numberOfSplits++
+    \li print("Split after character: " + lastSplit)
     \li lastSplit = SPLITS[lastSplit] \End
     \li
     \li \If $numberOfSplits \leq 0$ \Then 
-    \li \Return "Dont Split anywhere" \End
+    \li \Return print("Dont Split anywhere") \End
 \end{codebox}
+
+This algorithm uses 2 nested for loops. The outer one will run from 1 to $s.length$ while the inner one runs from 1 to the outer index. All operations within both loops are constant. The inner loop executes $j$ times for each execution of the outer loop giving you $1+2+3...+n$ executions, which is a known sum of $\frac{n(n+1)}{2}$, making this algorithm $O(n^2)$.
 
 \hfill
 
