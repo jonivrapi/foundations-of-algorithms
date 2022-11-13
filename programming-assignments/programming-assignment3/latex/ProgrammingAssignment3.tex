@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
+\usepackage{a4wide}
+
+\title{Programming Assignment 3}
+\author{Joni Vrapi}
+\date{11/13/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\hfill
+
+\textbf{Problem (a).} 
+
+\begin{codebox}
+    \Procname{$\proc{Partition}(A, p, r)$}
+    \li $i = p - 1$
+    \li $j = p$
+    \li
+    \li \If $j - i \geq 2$ \Then
+    \li x = \proc{Median-Of-Three(A, i, j)}
+    \li \Else
+    \li x = A[r] \End
+    \li
+    \li \For j to $r - 1$ \Do
+    \li \If $A[j] \leq x$ \Then
+    \li $i = i + 1$
+    \li swap A[i] and A[j] \End \End
+    \li
+    \li swap A[i + 1] and A[r]
+    \li
+    \li \Return $i + 1$
+\end{codebox}
+
+\begin{codebox}
+    \Procname{$\proc{Median-Of-Three}(A, i, j)$}
+    \li $k = \lfloor (i + j)/2 \rfloor$
+    \li
+    \li tempArray = [A[i], A[k], A[j]]
+    \li tempArray.sort()
+    \li
+    \li medianIndex = 1
+    \li
+    \li \Return tempArray[medianIndex]
+\end{codebox}
+
+\hfill
+
+\textbf{Analysis.} After running the \emph{tests.py} file as described in the README.md file, you will see that the produced output in terms of iterations stays exactly at 4. If we were to also vary the depth of the tree that is generated (against your instructions), we would see that this algorithm remains linear, even though I severely varied the Rationals, as well as other inputs into both functions. This was expected as per the asymptotic analysis performed above. 
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 
