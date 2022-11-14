@@ -22,15 +22,12 @@
 \begin{codebox}
     \Procname{$\proc{Partition}(A, p, r)$}
     \li $i = p - 1$
-    \li $j = p$
     \li
-    \li \If $j - i \geq 2$ \Then
-    \li x = \proc{Median-Of-Three(A, i, j)}
-    \li \Else
-    \li x = A[r] \End
+    \li (pivotValue, pivotIndex) = \proc{Median-Of-Three(A, p, r)}
+    \li swap A[r], A[pivotIndex]
     \li
-    \li \For j to $r - 1$ \Do
-    \li \If $A[j] \leq x$ \Then
+    \li \For j to [p, r) \Do
+    \li \If $A[j] \leq pivotValue$ \Then
     \li $i = i + 1$
     \li swap A[i] and A[j] \End \End
     \li
@@ -40,15 +37,18 @@
 \end{codebox}
 
 \begin{codebox}
-    \Procname{$\proc{Median-Of-Three}(A, i, j)$}
+    \Procname{$\proc{Median-Of-Three}(A, p, r)$}
     \li $k = \lfloor (i + j)/2 \rfloor$
     \li
-    \li tempArray = [A[i], A[k], A[j]]
-    \li tempArray.sort()
+    \li tempArray = [(A[p], p), (A[k], k), (A[r], r)]
+    \li tempArray.sort(tuple $=>$ tuple[0])
     \li
     \li medianIndex = 1
     \li
+    \li \If $r - p >= 2$ \Then
     \li \Return tempArray[medianIndex]
+    \li \Else 
+    \li \Return (A[r], r) \End
 \end{codebox}
 
 \hfill
