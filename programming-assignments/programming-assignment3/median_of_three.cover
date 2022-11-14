@@ -1,0 +1,54 @@
+    1: import math
+    1: import random
+       
+    1: loopIterations = 0
+       
+    1: def QuickSort(A, p, r):
+   54:     if p < r:
+   22:         q = Partition(A, p, r)
+   22:         QuickSort(A, p, q - 1)
+   22:         QuickSort(A, q + 1, r)
+       
+    1: def Partition(A, p, r):
+   22:     i = p - 1
+       
+   22:     (pivotValue, pivotIndex) = MedianOfThree(A, p, r)
+           # The book's implementation of Partition requires the partition on the right, so I swap the pivot with that here
+   22:     A[r], A[pivotIndex] = A[pivotIndex], A[r]
+       
+   82:     for j in range(p, r):
+               global loopIterations 
+   60:         loopIterations += 1
+   60:         if A[j] <= pivotValue:
+   32:             i = i + 1
+   32:             A[i], A[j] = A[j], A[i]
+   22:     A[i + 1], A[r] = A[r], A[i + 1]
+       
+   22:     return i + 1
+       
+    1: def MedianOfThree(A, p, r):
+   22:     k = math.floor((p + r) / 2)
+       
+           #sorted runs in O(n) in this case
+   88:     tempArray = sorted([(A[p], p), (A[k], k), (A[r], r)], key=lambda tup: tup[0])
+       
+   22:     medianIndex = 1
+       
+   22:     if r - p >= 2:
+   14:         return tempArray[medianIndex]
+           else:
+    8:         return (A[r], r)
+           
+           
+       
+   11: for i in range(0, 10):
+   65:     A = sorted([random.random() for _ in range(i)])
+   10:     A.reverse()
+   10:     p = 0
+   10:     r = len(A) - 1
+       
+   10:     QuickSort(A, p, r)
+       
+   10:     print(A)
+   10:     print(f'loop iterations: {loopIterations}')
+   10:     loopIterations = 0
