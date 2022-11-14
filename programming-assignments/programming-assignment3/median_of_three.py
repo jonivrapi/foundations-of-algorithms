@@ -1,44 +1,51 @@
 import math
 
-def QuickSort(A, p, r):
-    if p < r:
-        q = Partition(A, p, r)
-        QuickSort(A, p, q - 1)
-        QuickSort(A, q + 1, r)
+loopIterations = 0
 
-def Partition(A, p, r):
-    i = p - 1
-    j = p
+def QuickSort(A, lowIndex, highIndex):
+    if lowIndex < highIndex:
+        q = Partition(A, lowIndex, highIndex)
+        QuickSort(A, lowIndex, q - 1)
+        QuickSort(A, q + 1, highIndex)
 
-    if j - i >= 2:
-        x = MedianOfThree(A, p, r)
-    else:
-        x = A[r]
+def Partition(A, lowIndex, highIndex):
+    i = lowIndex - 1
 
-    for j in range(p, r):
-        if A[j] <= x:
+    (pivotValue, pivotIndex) = MedianOfThree(A, lowIndex, highIndex)
+    A[highIndex], A[pivotIndex] = A[pivotIndex], A[highIndex]
+
+    for j in range(lowIndex, highIndex):
+        global loopIterations 
+        loopIterations += 1
+        if A[j] <= pivotValue:
             i = i + 1
             A[i], A[j] = A[j], A[i]
-    A[i + 1], A[r] = A[r], A[i + 1]
+    A[i + 1], A[highIndex] = A[highIndex], A[i + 1]
 
     return i + 1
 
-def MedianOfThree(A, i, j):
-    k = math.floor((i + j) / 2)
+def MedianOfThree(A, lowIndex, highIndex):
+    k = math.floor((lowIndex + highIndex) / 2)
 
-    tempArray = [A[i], A[k], A[j]]
-    tempArray.sort()
-    
+    #sorted runs in O(n) in this case
+    tempArray = sorted([(A[lowIndex], lowIndex), (A[k], k), (A[highIndex], highIndex)], key=lambda tup: tup[0])
+
     medianIndex = 1
+
+    if highIndex - lowIndex >= 2:
+        return tempArray[medianIndex]
+    else:
+        return (A[highIndex], highIndex)
     
-    return tempArray[medianIndex]
+    
     
 
 
-A = [1, 9, 2, 8, 5, 3, 7, 6, 4, 4, 4]
+A = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 p = 0
 r = len(A) - 1
 
 QuickSort(A, p, r)
 
 print(A)
+print(f'loop iterations: {loopIterations}')
