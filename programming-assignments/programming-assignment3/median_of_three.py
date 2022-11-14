@@ -1,4 +1,5 @@
 import math
+import random
 
 loopIterations = 0
 
@@ -12,6 +13,7 @@ def Partition(A, p, r):
     i = p - 1
 
     (pivotValue, pivotIndex) = MedianOfThree(A, p, r)
+    # The book's implementation of Partition requires the partition on the right, so I swap the pivot with that here
     A[r], A[pivotIndex] = A[pivotIndex], A[r]
 
     for j in range(p, r):
@@ -38,14 +40,15 @@ def MedianOfThree(A, p, r):
         return (A[r], r)
     
     
-    
 
+for i in range(0, 10):
+    A = sorted([random.random() for _ in range(10)])
+    A.reverse()
+    p = 0
+    r = len(A) - 1
 
-A = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-p = 0
-r = len(A) - 1
+    QuickSort(A, p, r)
 
-QuickSort(A, p, r)
-
-print(A)
-print(f'loop iterations: {loopIterations}')
+    print(A)
+    print(f'loop iterations: {loopIterations}')
+    loopIterations = 0

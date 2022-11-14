@@ -1,3 +1,4 @@
+import random
 
 
 loopIterations = 0
@@ -23,11 +24,14 @@ def Partition(A, p, r):
     return i + 1
 
 
-A = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-p = 0
-r = len(A) - 1
+for i in range(0, 10):
+    A = sorted([random.random() for _ in range(10)])
+    A.reverse()
+    p = 0
+    r = len(A) - 1
 
-QuickSort(A, p, r)
+    QuickSort(A, p, r)
 
-print(A)
-print(f'loop iterations: {loopIterations}')
+    print(A)
+    print(f'loop iterations: {loopIterations}')
+    loopIterations = 0
