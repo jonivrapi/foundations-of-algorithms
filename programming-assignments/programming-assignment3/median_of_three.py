@@ -42,7 +42,7 @@ def MedianOfThree(A, p, r):
     
 
 for i in range(0, 10):
-    A = sorted([random.random() for _ in range(10)])
+    A = sorted([random.random() for _ in range(i)])
     A.reverse()
     p = 0
     r = len(A) - 1

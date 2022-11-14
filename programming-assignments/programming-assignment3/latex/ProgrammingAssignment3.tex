@@ -67,6 +67,8 @@ Which by substitution we know resolves to $\Theta(n^2)$. For normal \proc{Quicks
 
 which by the Master theorem we know is $O(nlog(n))$.
 
+\hfill
+
 \textbf{Problem (c).} The worst case asymptotic behavior of \proc{Quicksort} with median of three partitioning on an input set that is already sorted is, as mentioned in the previous answer, $O(nlog(n))$. The median can be chosen in $O(n)$ time while $log(n)$ partitions are made resulting in an $O(nlog(n))$ \emph{expected} worst case run time. In this balanced partitioning case, we have
 
 \begin{gather}
@@ -77,7 +79,7 @@ which by the Master theorem we know is $O(nlog(n))$.
 
 \hfill
 
-\textbf{Analysis.} 
+\textbf{Analysis.} After running each of the \emph{quicksort.py} and \emph{median-of-three.py} files as described in the README.md file, you will see the produced output in terms of a worst case scenario where each algorithm receives an input array (of increasing size from 0 to 10) in reverse sorted order. The normal implementation of quicksort takes the maximal amount of iterations on each run, growing exponentially. The median of three implementation, however, takes far fewer iterations, and in fact grows linearithmically. 
 
 \newpage
 \bibliography{citation} 
