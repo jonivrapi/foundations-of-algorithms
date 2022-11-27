@@ -41,6 +41,18 @@ In order to find out whether this bipartite graph has a perfect matching, we can
 
 If we set each edge's weight to be $1$, then the schedule will be feasible iff the maximum flow is $n$ and the number of edges in $G$ is also $n$.
 
+\hfill
+
+\textbf{Problem 2b.} First, we would construct the bipartite graph $G$ from (a). It takes $O(1)$ time to decide if $(p_i, d_j))$ should be an edge so the total time to build the graph would be $O(n^2)$. If we let $R$ denote the set of edges given to us by Renee, we can delete the edge $(p_j, d_k)$ to obtain $R'$ which would have a size of $n-1$ and have no person or day appear more than once. From \cite{website:3} we need to find an augmenting path with respect to $R'$ in $O(|E|) = O(n^2)$ time. If we find an augmenting path, then this gives us a perfect matching and would correspond to a feasible dinner. If we do not find an augmenting path, then it would hold that $R'$ is a maximum matching in $G$ and there would be no perfect matching -- and therefore no feasible dinner schedule. 
+
+\hfill
+
+\textbf{Problem 4a.} This problem can be modeled as a maximum flow network problem, much like problem 1. If we constructed a flow network with edges of weight 1 from the source, through $X$ and all the way into $S$, then the edges from $S$ into the sink would be of weight $|X|$. From source to $X$, as well as from $S$ to sink, there should be $|X|$ edges. From here we can use Ford-Fulkerson \cite{website:4} to compute the maximal flow in $O(V*E^2)$ time. If the maximal flow is equal to $|X|$, then there exists an evacuation route.
+
+\hfill
+
+\textbf{Problem 4b.} 
+
 \newpage
 \bibliography{citation} 
 \bibliographystyle{ieeetr}
