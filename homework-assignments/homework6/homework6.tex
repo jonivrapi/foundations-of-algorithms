@@ -51,7 +51,11 @@ If we set each edge's weight to be $1$, then the schedule will be feasible iff t
 
 \hfill
 
-\textbf{Problem 4b.} 
+\textbf{Problem 4b.} We could solve for this extra condition by splitting up each vertex $v$ in $G$ into a set of 2 vertices $v_i$ and $v_j$. All in-edges of $v$ will point to $v_i$ while all out-edges of $v$ will leave from $v_j$, and a single out-edge will leave from $v_i$ and point to $v_j$. We will weight these edges the same as in problem (4a) and re-run Ford-Fulkerson, with the condition that no two paths can share an edge now meaning that no two paths can share the internal edge between $v_i$ and $v_j$. We can then shrink the $(v_i, v_j)$ pairs back to produce a set of node-disjoint paths. The most simple example where the answer is "yes" to (a) and "no" to (b) is the following:
+
+\begin{center}
+    \includegraphics[width=9cm, height=5cm]{images/problem-4-example.jpg}
+\end{center}
 
 \newpage
 \bibliography{citation} 
