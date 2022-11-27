@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{clrscode3e}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\title{Homework 6}
+\author{Joni Vrapi}
+\date{11/26/2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Statement of Integrity:} I, Joni Vrapi, attempted to answer each question honestly and to the best of my abilities. I cited any, and all, help that I received in completing this assignment.
+
+\hfill
+
+\textbf{Problem 1.} A tree, by definition \cite{website:1}, is a type of graph in which any two vertices are connected by exactly one path and in which there are no cycles. In other words, a connected acyclic graph. We know that the edges in $E$ are undirected. We also know that both bfs and dfs produce the same tree $T$ which we will assume $G \neq T$. 
+
+If we therefore assume that $G$ is connected but not a tree, then it must contain a cycle $C$. If $C$ has $n$ nodes $u_1, u_2, ... , u_n$, then $C$ represents the cycle $u_1 \rightarrow u_2 \rightarrow ... \rightarrow u_n \rightarrow u_1$. If we assume that bfs and dfs encounter the cycle at node $u_i$, then dfs will add edges $(u_1, u_2), ... , (u_{i-2}, u_{i-1})$ while bfs will start by adding edges $(u_1, u_2), (u_1, (u_i))$. Since we can see that this contradicts the assumption that bfs and dfs have equal trees, we can see that bfs and dfs have equal trees iff the input graph is also a tree. Therefore, $G = T$.
+
+\hfill
+
+\textbf{Problem 2a.} If we have a bipartite graph $G$ where $p_n$ signifies a person, and $d_n$ signifies a cooking day, then a directed edge $(p_i, d_j)$ between them signifies if person $p_i$ is able to cook on day $d_j$. 
+
+\begin{center}
+    \includegraphics[width=4cm, height=5cm]{images/bipartite-graph.jpg}
+\end{center}
+
+In order to find out whether this bipartite graph has a perfect matching, we can use the Maximum Flow Algorithm \cite{website:2}. In order to set this up, we must add 2 more nodes (a source node $s$, and a sink node $t$) to our bipartite graph like so:
+
+\begin{center}
+    \includegraphics[width=10cm, height=5cm]{images/maximum-flow-graph.jpg}
+\end{center}
+
+If we set each edge's weight to be $1$, then the schedule will be feasible iff the maximum flow is $n$ and the number of edges in $G$ is also $n$.
+
+\newpage
+\bibliography{citation} 
+\bibliographystyle{ieeetr}
+
+\end{document} 
