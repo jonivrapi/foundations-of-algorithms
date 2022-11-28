@@ -47,6 +47,16 @@ If we set each edge's weight to be $1$, then the schedule will be feasible iff t
 
 \hfill
 
+\textbf{Problem 3.} The algorithm \cite{website:3} begins by scanning through the ordered triples, maintaining an array pointing to linked lists which are associated to each computer $C_a$. For each triple, we create two nodes $(C_i, t_k), (C_j, t_k)$ and directed edges between them in both directions. We also append (to their respective list) each $C$ node. If it is not the first triple for $C_x$, then we include an edge from $(C_x, t)$ to $(C_x, t_k)$ where $t$ is the timestamp of the previous element. By doing this, we are able to construct these new nodes in constant time per ordered triple.
+
+Now, if we want to decide if computer $C_a$ at time $x$ could have infected $C_b$ by time $y$, we would walk through the list we created above for $C_a$ until we reach the last node, and then run a directed BFS from that node to determine all nodes that are reachable from it. If the node $(C_b, y'); y' \leq y$ is reachable, we can say that it was infected, otherwise we would say that it has not been infected.
+
+In terms of time complexity, each triple that is parsed results in a constant number of nodes and edges added to the graph, so the graph has $O(m)$ nodes and edges. It takes a constant amount of time to build it per node and edge -- also $O(m)$. Finally, running BFS takes a linear amount of time in the size of the graph which is also $O(m)$.
+
+Finally, is the algorithm correct? The algorithm claims that if there are a sequence of paths between $C_a$ and $C_b$ then $C_b$ could have been infected by time $y$. Due to the way we are maintaining the lists of paths on a per-computer basis, and the fact that each time the virus moves from one computer to another, we are adding an edge between that computer and the next, there will always be a sequence of paths which describe the movements of the virus based on the given ordered triples. Knowing that there will always be $y'' \leq y \leq y'$ time for which the virus arrives at the next computer, it is obvious that we can build a sequence of edges that would result in a complete path. 
+
+\hfill
+
 \textbf{Problem 4a.} This problem can be modeled as a maximum flow network problem, much like problem 1. If we constructed a flow network with edges of weight 1 from the source, through $X$ and all the way into $S$, then the edges from $S$ into the sink would be of weight $|X|$. From source to $X$, as well as from $S$ to sink, there should be $|X|$ edges. From here we can use Ford-Fulkerson \cite{website:4} to compute the maximal flow in $O(V*E^2)$ time. If the maximal flow is equal to $|X|$, then there exists an evacuation route.
 
 \hfill
