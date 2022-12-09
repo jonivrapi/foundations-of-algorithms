@@ -22,6 +22,27 @@
 \hfill
 
 \textbf{Problem 1.} 
+decision variables are the variables you need to make a decision on - eg how many bowls/mugs do you need to produce to have the most revenue
+
+\hfill
+
+\textbf{Problem 2a.} If we let $x = (x_1, x_2, x_3)$ and $y = (y_1, y_2, y_3)$, then the expected loss for Player 1 can be calculated as $\sum{xAy^T}$ resulting in:
+
+\begin{gather}
+    x_1(y_2-y_3) + x_2(y_3-y_1) + x_3(y_1-y_2)
+\end{gather}
+
+\hfill
+
+\textbf{Problem 2b.} Player 2 playing any strategy other than $(\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$ will allow Player 1 to adjust his strategy to play off of Player 2's strategy, resulting in an expected gain for Player 1. For example, assume Player 2 plays $(1, 0, 0)$. Player 1 would then adjust his strategy to play $(0, 1, 0)$ resulting in an expected gain of 1 (from equation 1). Likewise, it is obvious that regardless of what strategy Player 2 chooses, other than $(\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$, Player 1 will always be able to play off of it towards an expected gain.
+
+\hfill
+
+\textbf{Problem 2c.} 
+
+\hfill
+
+\textbf{Problem 3.} 
 
 \newpage
 \bibliography{citation} 
