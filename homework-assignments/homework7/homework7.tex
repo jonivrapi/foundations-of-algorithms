@@ -81,14 +81,48 @@ We will need to compare $C$ with the cost of our greedy algorithm which is $\sum
 \textbf{Lemma:}
 
 \begin{gather}
-    \sum_{u \in U_s^*}c_u \leq \rho(d)(f_s + \sum_{u \in U_s^*}d_{us}) = H(d) \cdot C
+    \sum_{u \in U_s^*}c_u \leq \rho(d)(f_s + \sum_{u \in U_s^*}d_{us}) = \rho(d) \cdot C
 \end{gather}
 
 where $d = |U_s^*|$.
 
 \hfill
+The algorithm covers nodes $u_1, u_2...u_d$ in $U_s^*$ in order. If we consider when the algorithm covers the $i$th node, there are two cases:
 
-\textbf{Problem 3c.} 
+\begin{itemize}
+    \item Case 1: $s \notin T$
+        \subitem This implies that the cost $c_u$ is at most the cost of selecting site $s$ with set $U_s^* \cap R$ which is $c_{u_i} \leq \frac{C}{d-i+1}$
+    \item Case 2: $s \in T$
+        \subitem This implies that $c_{u_i} \leq d_{us}$
+\end{itemize}
+
+\hfill
+
+If we assume that Case 1 applies for the first $k$ nodes, and after that Case 2 applies, then we can sum all the costs in $U_s^*$
+
+\begin{gather}
+    \sum_{u \in U_s^*} c_u \leq \frac{C}{d} + \frac{C}{d-1} + ... + \frac{C}{d-k+1} + \sum_{i > d}d_{u_i}, s
+\end{gather}
+
+If $d=k$ then the upper bound on the cost is in fact $\rho(d) \cdot C$. If $k < d$ then the costs $\sum_{u \in U_s^*}d_{us}$ is bounded by $C$ so it is also $\rho(d) \cdot C$.
+
+Finally, if we let $T^*$ and $U_s^*$ be the optimal solution, the total cost is
+
+\begin{gather}
+    \sum_{s \in T^*} (f_s + \sum_{u \in U_s^*}) = \sum_{s \in T^*} \cdot C
+\end{gather}
+
+The lemma bounds each term of the cost by $\rho(d)$ proving that this is a $\rho(n)$-approximate algorithm.
+
+\hfill
+
+\textbf{Problem 3c.} Using the lemma to bound each term of (5) to get the optimum, we arrive at 
+
+\begin{gather}
+    OPT -  \sum_{s \in T^*} (f_s + \sum_{u \in U_s^*}) \leq \sum_{s \in T^*} \rho(n) \sum_{u \in U_s^*} c_u - \rho(n) \sum_{u \in U} c_u
+\end{gather}
+
+which would return a solution within a factor of $O(log(max_i |U_s^*|))$
 
 \newpage
 \bibliography{citation} 
