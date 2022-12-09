@@ -38,11 +38,57 @@ decision variables are the variables you need to make a decision on - eg how man
 
 \hfill
 
-\textbf{Problem 2c.} 
+\textbf{Problem 2c.} Letting $x = y = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$ results in an expected outcome per (1) of 0. This result is indicative of both players winning the same amount of times, on average, resulting in a draw. The sticking point here, however, is that neither player has an incentive to change strategies. If one player were to choose an imbalanced strategy, the other player could alter their strategy to take advantage of it resulting in an expected gain for the other player. Therefore, we have reached a Nash equilibrium. 
 
 \hfill
 
-\textbf{Problem 3.} 
+\textbf{Problem 2d.} No, it is not possible for some mixed strategy  where $y' \neq (\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$ to form a Nash equilibrium because any mixed strategy where rock, paper, or scissors are played in an imbalanced way will allow for the other player to play a strategy where the balance was reversed to accumulate more wins. For example, if Player 2 were to choose slightly more rock than paper or scissors, Player 1 could change their strategy to favor paper by the same amount, resulting in an expected gain.
+
+\hfill
+
+\textbf{Problem 3a.} From \cite{website:1} we choose:
+
+\begin{codebox}
+    \Procname{\proc{Facility-Location()}}
+    \li with $R = U$ and $T = \emptyset$
+    \li \While $R$ is not empty \Do
+    \li $c = min_{u \in R, s \in T} d_{us}$
+    \li select $s \in R \ T$ and set $U_s \subset R$ that minimizes: $c' = \frac{f_s + \sum{}_{u \in U_s}d_{us}}{|U_s|}$
+    \li
+    \li \If $c' \leq c$ \Then
+    \li select the site s and set $U_s$ used to obtain $c'$ above
+    \li add $s$ to $T$ and delete $U_s$ from $R$
+    \li set $c_u = c'$ for all $u \in U_s$
+    \li
+    \li \Else
+    \li select $s$ and $u$ obtaining the first minimum
+    \li add $u$ to $U_s$
+    \li set $c_u = c$ \End \End
+\end{codebox}
+
+\hfill
+
+\textbf{Problem 3b.} From \cite{website:1} we consider an optimal solution which contains a subset $T^*$ of sites, and $s \in T^*$ is used to cover a set $U_s^*$ of users. The cost of using $s$ to cover $U_s^*$ is
+
+\begin{gather}
+    C = f_s + \sum_{u \in U_s^*}d_{us}    
+\end{gather}
+
+We will need to compare $C$ with the cost of our greedy algorithm which is $\sum_{u \in U_s^*}c_u$
+
+\hfill
+
+\textbf{Lemma:}
+
+\begin{gather}
+    \sum_{u \in U_s^*}c_u \leq \rho(d)(f_s + \sum_{u \in U_s^*}d_{us}) = H(d) \cdot C
+\end{gather}
+
+where $d = |U_s^*|$.
+
+\hfill
+
+\textbf{Problem 3c.} 
 
 \newpage
 \bibliography{citation} 
