@@ -36,7 +36,11 @@
 \textbf{Problem 1c.} The constraints here are that the score matrix exists, e.g. objects are found, detections can be matched only to a single track, and tracks cannot be assigned more than once. This leads to the following standard form linear program:
 
 \begin{gather}
-    
+    M \geq 0 \\
+    N \geq 0 \\
+    s_i = 0\ \text{or}\ 1 \\
+    s_{ij} \neq s_{hj} \\
+    \sum_{j=1}^N s_{ij} \geq b_i
 \end{gather}
 
 \hfill
