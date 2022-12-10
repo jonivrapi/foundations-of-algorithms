@@ -21,8 +21,23 @@
 
 \hfill
 
-\textbf{Problem 1.} 
-decision variables are the variables you need to make a decision on - eg how many bowls/mugs do you need to produce to have the most revenue
+\textbf{Problem 1a.} The variables in this problem represent decisions that must be made about the problem space, otherwise referred to as decision variables. Given that the score matrix is $M \times N$ in the reals $\mathbb{R}$, the number of variables in this problem would be $N$.
+
+\hfill
+
+\textbf{Problem 1b.} The objective function should be defined as a function which maximizes the sum of the similarity scores from each track/detection pair:
+
+\begin{gather}
+    maximize \sum_{j=1}^N s_{ij}
+\end{gather}
+
+\hfill
+
+\textbf{Problem 1c.} The constraints here are that the score matrix exists, e.g. objects are found, detections can be matched only to a single track, and tracks cannot be assigned more than once. This leads to the following standard form linear program:
+
+\begin{gather}
+    
+\end{gather}
 
 \hfill
 
@@ -122,7 +137,7 @@ The lemma bounds each term of the cost by $\rho(d)$ proving that this is a $\rho
     OPT -  \sum_{s \in T^*} (f_s + \sum_{u \in U_s^*}) \leq \sum_{s \in T^*} \rho(n) \sum_{u \in U_s^*} c_u - \rho(n) \sum_{u \in U} c_u
 \end{gather}
 
-which would return a solution within a factor of $O(log(max_i |U_s^*|))$
+which would return a solution within a factor of $O(log(max_s |U_s^*|))$
 
 \newpage
 \bibliography{citation} 
