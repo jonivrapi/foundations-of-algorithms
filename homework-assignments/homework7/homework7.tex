@@ -135,10 +135,10 @@ The lemma bounds each term of the cost by $\rho(d)$ proving that this is a $\rho
 
 \hfill
 
-\textbf{Problem 3c.} Using the lemma to bound each term of (5) to get the optimum, we arrive at 
+\textbf{Problem 3c.} Using the lemma to bound each term of (5) to get the optimal solution, we arrive at 
 
 \begin{gather}
-    OPT -  \sum_{s \in T^*} (f_s + \sum_{u \in U_s^*}) \leq \sum_{s \in T^*} \rho(n) \sum_{u \in U_s^*} c_u - \rho(n) \sum_{u \in U} c_u
+    \sum_{s \in T^*} (f_s + \sum_{u \in U_s^*}) \leq \sum_{s \in T^*} \rho(n) \sum_{u \in U_s^*} c_u - \rho(n) \sum_{u \in U} c_u
 \end{gather}
 
 which would return a solution within a factor of $O(log(max_s |U_s^*|))$
