@@ -1,0 +1,124 @@
+    2: class Signal:
+    1:     def __init__(self, testCase, x, y, s):
+    4:         self.testCase = testCase
+    4:         self.x = x
+    4:         self.y = y
+    4:         self.s = s
+               # keeps track of sets of indexes for each input + noise
+    4:         self.xSet = []
+    4:         self.ySet = []
+    4:         self.noiseSet = []
+               # keeps track of the current index of x and y that needs to be found
+    4:         self.xMovingIndex = 0
+    4:         self.yMovingIndex = 0
+               # keeps track of how many times we have found a complete x and y
+    4:         self.xCompleted = 0
+    4:         self.yCompleted = 0
+       
+    4:         self.iterations = 0
+           
+           # moves yMovingIndex by 1
+    1:     def moveYIndex(self):
+   29:         if (self.yMovingIndex >= len(self.y) - 1):
+   11:             self.yMovingIndex = 0
+   11:             self.yCompleted += 1
+               else:
+   18:             self.yMovingIndex += 1
+           
+           # moves xMovingIndex by 1
+    1:     def moveXIndex(self):
+   34:         if (self.xMovingIndex >= len(self.x) - 1):
+   10:             self.xMovingIndex = 0
+   10:             self.xCompleted += 1
+               else:
+   24:             self.xMovingIndex += 1
+       
+           # checks if the input character is the ith character of x
+    1:     def isIthCharacterOfX(self, character):
+  122:         return self.x[self.xMovingIndex] == character
+       
+           # checks if the input character is the ith character of y
+    1:     def isIthCharacterOfY(self, character):
+   75:         return self.y[self.yMovingIndex] == character
+       
+           # prunes xSet and ySet of values in noise
+    1:     def prune(self):
+    6:         largestIndex = self.noiseSet[len(self.noiseSet) - 1]
+       
+    6:         self.xMovingIndex = 0
+    6:         self.yMovingIndex = 0
+   34:         self.xSet[:] = [x for x in self.xSet if x < largestIndex]
+   38:         self.ySet[:] = [y for y in self.ySet if y < largestIndex]
+           
+           # proceses the input string s linearly as it comes in
+    1:     def process(self):
+    4:         print(f"Test case: {self.testCase}")
+   73:         for index in range(len(self.s)):
+   69:             self.iterations += 1
+       
+   69:             if (self.isIthCharacterOfX(self.s[index]) and self.isIthCharacterOfY(self.s[index])):
+                       # if i have completed x more times than y, i need to append to y and move its index
+   22:                 if (self.xCompleted > self.yCompleted):
+    4:                     self.ySet.append(index + 1)
+    4:                     self.moveYIndex()
+                       # if they have been completed the same amount of times, i need to add to x and move its index
+   18:                 elif (self.xCompleted == self.yCompleted):
+   14:                     if(self.xMovingIndex > self.yMovingIndex):
+    8:                         self.xSet.append(index + 1)
+    8:                         self.moveXIndex()
+                           else:
+    6:                         self.ySet.append(index + 1)
+    6:                         self.moveYIndex()
+                       else:
+    4:                     self.xSet.append(index + 1)
+    4:                     self.moveXIndex()
+   22:                 continue
+                   
+                   # if current character is the ith character of x, we need to add to xSet and move its index
+   47:             if (self.isIthCharacterOfX(self.s[index])):
+   22:                 self.xSet.append(index + 1)
+   22:                 self.moveXIndex()
+   22:                 continue
+       
+                   # if current character is the ith character of y, we need to add to ySet and move its index
+   25:             if (self.isIthCharacterOfY(self.s[index])):
+   19:                 self.ySet.append(index + 1)
+   19:                 self.moveYIndex()
+   19:                 continue
+       
+                   # if current character neither of the above 2 conditions, then its noise and we need to prune
+    6:             if (not self.isIthCharacterOfX(self.s[index]) and not self.isIthCharacterOfY(self.s[index])):
+    6:                 self.noiseSet.append(index)
+    6:                 self.prune()
+       
+    4:         if (len(self.noiseSet)):
+   35:             self.noiseSet = [x for x in range(1, len(self.s) + 1) if x not in self.xSet and x not in self.ySet]
+    1:             self.iterations += len(self.noiseSet)
+       
+               
+    4:         print(f'xSet: {self.xSet}')
+    4:         print(f'ySet: {self.ySet}')
+    4:         print(f'noiseSet: {self.noiseSet}')
+       
+    4:         if (len(self.xSet) + len(self.ySet) + len(self.noiseSet) == len(self.s)):
+    4:             print("This is an interweaving")
+               
+    4:         print(f'Total Iterations: {self.iterations} with respect to an input of size s: {len(self.s)}')
+       
+    1: s1 = Signal("s1", "101", "0", "100010101")
+    1: s1.process()
+       
+    1: print("----------------------------------")
+       
+    1: s2 = Signal("s2", "101", "010", "101010101010101")
+    1: s2.process()
+       
+    1: print("----------------------------------")
+       
+    1: s3 = Signal("s3", "101", "010", "001100110101011001100110010101111")
+    1: s3.process()
+       
+    1: print("----------------------------------")
+       
+    1: s4 = Signal("s4", "101", "010", "100110011001")
+    1: s4.process()
