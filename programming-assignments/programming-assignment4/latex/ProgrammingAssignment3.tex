@@ -5,9 +5,9 @@
 \usepackage{clrscode3e}
 \usepackage{a4wide}
 
-\title{Programming Assignment 3}
+\title{Programming Assignment 4}
 \author{Joni Vrapi}
-\date{11/13/2022}
+\date{12/11/2022}
 
 \begin{document}
 
@@ -18,68 +18,6 @@
 \hfill
 
 \textbf{Problem (a).} 
-
-\begin{codebox}
-    \Procname{$\proc{Partition}(A, p, r)$}
-    \li $i = p - 1$
-    \li
-    \li (pivotValue, pivotIndex) = \proc{Median-Of-Three(A, p, r)}
-    \li swap A[r], A[pivotIndex]
-    \li
-    \li \For j to [p, r) \Do
-    \li \If $A[j] \leq pivotValue$ \Then
-    \li $i = i + 1$
-    \li swap A[i] and A[j] \End \End
-    \li
-    \li swap A[i + 1] and A[r]
-    \li
-    \li \Return $i + 1$
-\end{codebox}
-
-\begin{codebox}
-    \Procname{$\proc{Median-Of-Three}(A, p, r)$}
-    \li $k = \lfloor (i + j)/2 \rfloor$
-    \li
-    \li tempArray = [(A[p], p), (A[k], k), (A[r], r)]
-    \li tempArray.sort(tuple $=>$ tuple[0])
-    \li
-    \li medianIndex = 1
-    \li
-    \li \If $r - p >= 2$ \Then
-    \li \Return tempArray[medianIndex]
-    \li \Else 
-    \li \Return (A[r], r) \End
-\end{codebox}
-
-\hfill
-
-\textbf{Problem (b).} The worst case asymptotic behavior of \proc{Quicksort} with median of three partitioning occurs when every element in the array is the same number. This negates the effect of the median choosing, as every element is the same, resulting in an arbitrary choice of a pivot (producing unbalanced partitions), requiring $\Theta(n)$ recursive calls giving us
-
-\begin{gather}
-    T(n) = T(n - 1) + T(0) + \Theta(n)
-\end{gather}
-
-Which by substitution we know resolves to $\Theta(n^2)$. For normal \proc{Quicksort}, this same thing happens both in this case, as well as when the array is in reverse sorted order, resulting in maximally unbalanced partitions and a $\Theta(n^2)$ run time. The \emph{expected} worst case run time with median of three partitioning, however, is $O(nlog(n))$ due to the fact that a median is chosen which results in balanced partitioning. The median can be chosen in $O(n)$ time while $log(n)$ partitions are made resulting in an $O(nlog(n))$ \emph{expected} worst case run time. In this balanced partitioning case, we have
-
-\begin{gather}
-    T(n) = 2T(n/2) + \Theta(n)
-\end{gather}
-
-which by the Master theorem we know is $O(nlog(n))$.
-
-\hfill
-
-\textbf{Problem (c).} The worst case asymptotic behavior of \proc{Quicksort} with median of three partitioning on an input set that is already sorted is, as mentioned in the previous answer, $O(nlog(n))$. The median can be chosen in $O(n)$ time while $log(n)$ partitions are made resulting in an $O(nlog(n))$ \emph{expected} worst case run time. In this balanced partitioning case, we have
-
-\begin{gather}
-    T(n) = 2T(n/2) + \Theta(n)
-\end{gather}
-
-which by the Master theorem we know is $O(nlog(n))$.
-
-\hfill
-
-\textbf{Analysis.} After running each of the \emph{quicksort.py} and \emph{median-of-three.py} files as described in the README.md file, you will see the produced output in terms of a worst case scenario where each algorithm receives an input array (of increasing size from 0 to 10) in reverse sorted order. The normal implementation of quicksort takes the maximal amount of iterations on each run, growing exponentially. The median of three implementation, however, takes far fewer iterations, and in fact grows linearithmically. 
 
 \newpage
 \bibliography{citation} 

@@ -3,21 +3,26 @@ class Signal:
         self.x = x
         self.y = y
         self.s = s
+        # keeps track of sets of indexes for each input + noise
         self.xSet = []
         self.ySet = []
         self.noiseSet = []
+        # keeps track of the current index of x and y that needs to be found
         self.xMovingIndex = 0
         self.yMovingIndex = 0
+        # keeps track of how many times we have found a complete x and y
         self.xCompleted = 0
         self.yCompleted = 0
     
+    # moves yMovingIndex by 1
     def moveYIndex(self):
         if (self.yMovingIndex >= len(self.y) - 1):
             self.yMovingIndex = 0
             self.yCompleted += 1
         else:
             self.yMovingIndex += 1
-
+    
+    # moves xMovingIndex by 1
     def moveXIndex(self):
         if (self.xMovingIndex >= len(self.x) - 1):
             self.xMovingIndex = 0
@@ -25,12 +30,15 @@ class Signal:
         else:
             self.xMovingIndex += 1
 
+    # checks if the input character is the ith character of x
     def isIthCharacterOfX(self, character):
         return self.x[self.xMovingIndex] == character
 
+    # checks if the input character is the ith character of y
     def isIthCharacterOfY(self, character):
         return self.y[self.yMovingIndex] == character
 
+    # prunes xSet and ySet of values in noise
     def prune(self):
         largestIndex = self.noiseSet[len(self.noiseSet) - 1]
 
@@ -39,12 +47,15 @@ class Signal:
         self.xSet[:] = [x for x in self.xSet if x < largestIndex]
         self.ySet[:] = [y for y in self.ySet if y < largestIndex]
     
+    # proceses the input string s linearly as it comes in
     def process(self):
         for index in range(len(self.s)):
             if (self.isIthCharacterOfX(self.s[index]) and self.isIthCharacterOfY(self.s[index])):
+                # if i have completed x more times than y, i need to append to y and move its index
                 if (self.xCompleted > self.yCompleted):
                     self.ySet.append(index + 1)
                     self.moveYIndex()
+                # if they have been completed the same amount of times, i need to add to x and move its index
                 elif (self.xCompleted == self.yCompleted):
                     if(self.xMovingIndex > self.yMovingIndex):
                         self.xSet.append(index + 1)
@@ -57,16 +68,19 @@ class Signal:
                     self.moveXIndex()
                 continue
             
+            # if current character is the ith character of x, we need to add to xSet and move its index
             if (self.isIthCharacterOfX(self.s[index])):
                 self.xSet.append(index + 1)
                 self.moveXIndex()
                 continue
 
+            # if current character is the ith character of y, we need to add to ySet and move its index
             if (self.isIthCharacterOfY(self.s[index])):
                 self.ySet.append(index + 1)
                 self.moveYIndex()
                 continue
 
+            # if current character neither of the above 2 conditions, then its noise and we need to prune
             if (not self.isIthCharacterOfX(self.s[index]) and not self.isIthCharacterOfY(self.s[index])):
                 self.noiseSet.append(index)
                 self.prune()
