@@ -11,6 +11,7 @@ Finally, the file `test-cases.txt` contains the output from running the program.
 1. signal.py
 2. signal.cover
 3. test-cases.txt
-4.
+4. ProgrammingAssignment4.pdf
+5. README.md
 
 All `.cover` files are trace files. All `.py` files are code files. The `.pdf` file is my compiled latex for this assignment.
