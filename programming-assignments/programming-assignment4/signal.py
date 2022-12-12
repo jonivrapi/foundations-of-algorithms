@@ -34,7 +34,8 @@ class Signal:
     def prune(self):
         largestIndex = self.noiseSet[len(self.noiseSet) - 1]
 
-        self.xMovingIndex = self.yMovingIndex = 0
+        self.xMovingIndex = 0
+        self.yMovingIndex = 0
         self.xSet[:] = [x for x in self.xSet if x < largestIndex]
         self.ySet[:] = [y for y in self.ySet if y < largestIndex]
     
