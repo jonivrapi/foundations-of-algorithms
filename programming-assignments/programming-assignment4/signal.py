@@ -10,18 +10,20 @@ y = "010"
 
 xSet = []
 ySet = []
-noise = []
 
 xMovingIndex = 0
 yMovingIndex = 0
-noiseMovingIndex = 0
 
+xCompleted = 0
+yCompleted = 0
 lastChecked = 'x'
 
 def moveYIndex():
     global yMovingIndex
+    global yCompleted
     if (yMovingIndex >= len(y) - 1):
         yMovingIndex = 0
+        yCompleted += 1
     else:
         yMovingIndex += 1
 
@@ -29,19 +31,12 @@ def moveYIndex():
 
 def moveXIndex():
     global xMovingIndex
+    global xCompleted
     if (xMovingIndex >= len(x) - 1):
         xMovingIndex = 0
+        xCompleted += 1
     else:
         xMovingIndex += 1
-
-    print(f'xMovingIndex: {xMovingIndex}')
-
-def moveNoiseIndex():
-    global noiseMovingIndex
-    if (noiseMovingIndex >= len(noise) - 1):
-        noiseMovingIndex = 0
-    else:
-        noiseMovingIndex += 1
 
     print(f'xMovingIndex: {xMovingIndex}')
 
@@ -58,58 +53,49 @@ def isIthCharacterOfY(character):
 for index in range(len(s)):
     print(f"Character index: {index} | Character: {s[index]}")
 
-    if (lastChecked == 'x'):
-        if (isIthCharacterOfX(s[index])):
-            print(f'length of xSet: {len(xSet)}')
-            xSet.append(index + 1)
-            moveXIndex()
-            lastChecked = 'x'
-
-        elif (isIthCharacterOfY(s[index])):
-            print(f'length of ySet: {len(ySet)}')
+    if (isIthCharacterOfX(s[index]) and isIthCharacterOfY(s[index])):
+        if (xCompleted > yCompleted):
             ySet.append(index + 1)
             moveYIndex()
-            lastChecked = 'y'
+        elif (xCompleted == yCompleted):
+            if(xMovingIndex > yMovingIndex):
+                xSet.append(index + 1)
+                moveXIndex()
+            else:
+                ySet.append(index + 1)
+                moveYIndex()
         else:
-            noise.append(index + 1)
-            moveNoiseIndex()
-            lastChecked = 'noise'
-
-    elif (lastChecked == 'y'):
-        if (isIthCharacterOfY(s[index])):
-            print(f'length of ySet: {len(ySet)}')
-            ySet.append(index + 1)
-            moveYIndex()
-            lastChecked = 'y'
-
-        elif (isIthCharacterOfX(s[index])):
-            print(f'length of xSet: {len(xSet)}')
             xSet.append(index + 1)
             moveXIndex()
-            lastChecked = 'x'
-        else:
-            noise.append(index + 1)
-            moveNoiseIndex()
-            lastChecked = 'noise'
-    elif (lastChecked == 'noise'):
-        if (not isIthCharacterOfX(s[index]) and not isIthCharacterOfY(s[index])):
-            noise.append(index + 1)
-            moveNoiseIndex()
-            lastChecked = 'noise'
-        elif (isIthCharacterOfX(s[index])):
-            print(f'length of xSet: {len(xSet)}')
-            xSet.append(index + 1)
-            moveXIndex()
-            lastChecked = 'x'
+        continue
+    # if (lastChecked == 'x'):
+    if (isIthCharacterOfX(s[index])):
+        print(f'length of xSet: {len(xSet)}')
+        xSet.append(index + 1)
+        moveXIndex()
+        lastChecked = 'x'
+        continue
 
-        elif (isIthCharacterOfY(s[index])):
-            print(f'length of ySet: {len(ySet)}')
-            ySet.append(index + 1)
-            moveYIndex()
-            lastChecked = 'y'
-            
+    if (isIthCharacterOfY(s[index])):
+        print(f'length of ySet: {len(ySet)}')
+        ySet.append(index + 1)
+        moveYIndex()
+        lastChecked = 'y'
+        continue
+    # elif (lastChecked == 'y'):
+    #     if (isIthCharacterOfY(s[index])):
+    #         print(f'length of ySet: {len(ySet)}')
+    #         ySet.append(index + 1)
+    #         moveYIndex()
+    #         lastChecked = 'y'
+    #         continue
 
+    #     elif (isIthCharacterOfX(s[index])):
+    #         print(f'length of xSet: {len(xSet)}')
+    #         xSet.append(index + 1)
+    #         moveXIndex()
+    #         lastChecked = 'x'
+    #         continue
 
 print(f'xSet: {xSet}')
 print(f'ySet: {ySet}')
-print(f'noise: {noise}')
