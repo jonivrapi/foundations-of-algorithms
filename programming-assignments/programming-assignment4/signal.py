@@ -78,14 +78,23 @@ class Signal:
         print(f'ySet: {self.ySet}')
         print(f'noiseSet: {self.noiseSet}')
 
+        if (len(self.xSet) + len(self.ySet) + len(self.noiseSet) == len(self.s)):
+            print("This is an interweaving")
+
 s1 = Signal("101", "0", "100010101")
 s1.process()
+
+print("----------------------------------")
 
 s2 = Signal("101", "010", "101010101010101")
 s2.process()
 
+print("----------------------------------")
+
 s3 = Signal("101", "010", "001100110101011001100110010101111")
 s3.process()
+
+print("----------------------------------")
 
 s4 = Signal("101", "010", "100110011001")
 s4.process()
