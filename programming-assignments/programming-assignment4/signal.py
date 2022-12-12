@@ -13,6 +13,8 @@ class Signal:
         # keeps track of how many times we have found a complete x and y
         self.xCompleted = 0
         self.yCompleted = 0
+
+        self.iterations = 0
     
     # moves yMovingIndex by 1
     def moveYIndex(self):
@@ -50,6 +52,8 @@ class Signal:
     # proceses the input string s linearly as it comes in
     def process(self):
         for index in range(len(self.s)):
+            self.iterations += 1
+
             if (self.isIthCharacterOfX(self.s[index]) and self.isIthCharacterOfY(self.s[index])):
                 # if i have completed x more times than y, i need to append to y and move its index
                 if (self.xCompleted > self.yCompleted):
@@ -87,6 +91,8 @@ class Signal:
 
         if (len(self.noiseSet)):
             self.noiseSet = [x for x in range(1, len(self.s) + 1) if x not in self.xSet and x not in self.ySet]
+            self.iterations += len(self.noiseSet)
+
         
         print(f'xSet: {self.xSet}')
         print(f'ySet: {self.ySet}')
@@ -94,6 +100,8 @@ class Signal:
 
         if (len(self.xSet) + len(self.ySet) + len(self.noiseSet) == len(self.s)):
             print("This is an interweaving")
+        
+        print(f'Total Iterations: {self.iterations} with respect to an input of size s: {len(self.s)}')
 
 s1 = Signal("101", "0", "100010101")
 s1.process()

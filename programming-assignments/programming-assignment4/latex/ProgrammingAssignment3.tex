@@ -17,7 +17,50 @@
 
 \hfill
 
-\textbf{Problem (a).} 
+\textbf{Problem 1c.} 
+
+\begin{codebox}
+    \Procname{$\proc{Process-Signal}(x, y, s)$}
+    \li xSet = ySet = noiseSet = []
+    \li xMovingIndex = yMovingIndex = xCompleted = yCompleted = 0
+    \li \For index = 0 to length(s) \Do
+    \li \If s[index] is the i'th character of both x and y \Then
+    \li \If x has been completed more than y \Then
+    \li ySet.append(index + 1)
+    \li move y index by 1 through y 
+    \li \ElseIf xCompleted == yCompleted \Then
+    \li \If xMovingIndex is ahead of yMovingIndex \Then
+    \li xSet.append(index + 1)
+    \li move x index by 1 through x
+    \li \Else 
+    \li ySet.append(index + 1)
+    \li move y index by 1 through y \End
+    \li \Else
+    \li xSet.append(index + 1)
+    \li move x index by 1 through x \End
+    \li continue \End
+    \li
+    \li \If s[index] is the i'th character of x \Then
+    \li xSet.append(index + 1)
+    \li move x index by 1 through x 
+    \li continue \End
+    \li
+    \li \If s[index] is the i'th character of y \Then
+    \li ySet.append(index + 1)
+    \li move y index by 1 through y
+    \li continue \End
+    \li
+    \li \If length(noiseSet != 0) \Then
+    \li assign to noiseSet an array of integers from 1 to length(s) 
+    \li that do not include any numbers that are in xSet or ySet \End
+    \li
+    \li \If length(xSet) + length(ySet) + length(noiseSet) == length(s) \Then
+    \li this is an interweaving \End
+\end{codebox}
+
+\hfill
+
+\textbf{Problem 1d.} This algorithm processes the signal "as it comes in" via a single for loop which iterates through the input string only once for an $O(n)$ time. There are many comparisons that are made, all of which are $O(1)$ operations. Finally, to get the noise in the signal, it generates another array of size $m < n$ in $O(m)$ time. In total, this is $O(n) + O(m)$ which is linear with respect to inputs, so this is an $O(n)$ algorithm.
 
 \newpage
 \bibliography{citation} 
