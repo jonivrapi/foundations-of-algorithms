@@ -68,7 +68,7 @@ for index in range(len(s)):
             xSet.append(index + 1)
             moveXIndex()
         continue
-    # if (lastChecked == 'x'):
+    
     if (isIthCharacterOfX(s[index])):
         print(f'length of xSet: {len(xSet)}')
         xSet.append(index + 1)
@@ -82,20 +82,6 @@ for index in range(len(s)):
         moveYIndex()
         lastChecked = 'y'
         continue
-    # elif (lastChecked == 'y'):
-    #     if (isIthCharacterOfY(s[index])):
-    #         print(f'length of ySet: {len(ySet)}')
-    #         ySet.append(index + 1)
-    #         moveYIndex()
-    #         lastChecked = 'y'
-    #         continue
-
-    #     elif (isIthCharacterOfX(s[index])):
-    #         print(f'length of xSet: {len(xSet)}')
-    #         xSet.append(index + 1)
-    #         moveXIndex()
-    #         lastChecked = 'x'
-    #         continue
 
 print(f'xSet: {xSet}')
 print(f'ySet: {ySet}')
