@@ -10,35 +10,33 @@ y = "010"
 
 xSet = []
 ySet = []
+noiseSet = []
 
 xMovingIndex = 0
 yMovingIndex = 0
 
 xCompleted = 0
 yCompleted = 0
-lastChecked = 'x'
 
 def moveYIndex():
     global yMovingIndex
     global yCompleted
+
     if (yMovingIndex >= len(y) - 1):
         yMovingIndex = 0
         yCompleted += 1
     else:
         yMovingIndex += 1
 
-    print(f'yMovingIndex: {yMovingIndex}')
-
 def moveXIndex():
     global xMovingIndex
     global xCompleted
+    
     if (xMovingIndex >= len(x) - 1):
         xMovingIndex = 0
         xCompleted += 1
     else:
         xMovingIndex += 1
-
-    print(f'xMovingIndex: {xMovingIndex}')
 
 def isIthCharacterOfX(character):
     isIthCharacter = x[xMovingIndex] == character
@@ -48,11 +46,23 @@ def isIthCharacterOfY(character):
     isIthCharacter = y[yMovingIndex] == character
     return isIthCharacter
 
+def prune():
+    global xSet
+    global ySet
+    global xMovingIndex
+    global yMovingIndex
+    global noiseSet
+
+    # noiseSet = noiseSet + xSet + ySet
+
+    largestIndex = noiseSet[len(noiseSet) - 1]
+
+    xMovingIndex = yMovingIndex = 0
+    xSet[:] = [x for x in xSet if x < largestIndex]
+    ySet[:] = [y for y in ySet if y < largestIndex]
 
 
 for index in range(len(s)):
-    print(f"Character index: {index} | Character: {s[index]}")
-
     if (isIthCharacterOfX(s[index]) and isIthCharacterOfY(s[index])):
         if (xCompleted > yCompleted):
             ySet.append(index + 1)
@@ -70,18 +80,22 @@ for index in range(len(s)):
         continue
     
     if (isIthCharacterOfX(s[index])):
-        print(f'length of xSet: {len(xSet)}')
         xSet.append(index + 1)
         moveXIndex()
-        lastChecked = 'x'
         continue
 
     if (isIthCharacterOfY(s[index])):
-        print(f'length of ySet: {len(ySet)}')
         ySet.append(index + 1)
         moveYIndex()
-        lastChecked = 'y'
         continue
+
+    if (not isIthCharacterOfX(s[index]) and not isIthCharacterOfY(s[index])):
+        noiseSet.append(index)
+        prune()
+
+if (len(noiseSet)):
+    noiseSet = [x for x in range(1, len(s) + 1) if x not in xSet and x not in ySet]
 
 print(f'xSet: {xSet}')
 print(f'ySet: {ySet}')
+print(f'noiseSet: {noiseSet}')
