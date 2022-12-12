@@ -1,5 +1,6 @@
 class Signal:
-    def __init__(self, x, y, s):
+    def __init__(self, testCase, x, y, s):
+        self.testCase = testCase
         self.x = x
         self.y = y
         self.s = s
@@ -51,6 +52,7 @@ class Signal:
     
     # proceses the input string s linearly as it comes in
     def process(self):
+        print(f"Test case: {self.testCase}")
         for index in range(len(self.s)):
             self.iterations += 1
 
@@ -103,20 +105,20 @@ class Signal:
         
         print(f'Total Iterations: {self.iterations} with respect to an input of size s: {len(self.s)}')
 
-s1 = Signal("101", "0", "100010101")
+s1 = Signal("s1", "101", "0", "100010101")
 s1.process()
 
 print("----------------------------------")
 
-s2 = Signal("101", "010", "101010101010101")
+s2 = Signal("s2", "101", "010", "101010101010101")
 s2.process()
 
 print("----------------------------------")
 
-s3 = Signal("101", "010", "001100110101011001100110010101111")
+s3 = Signal("s3", "101", "010", "001100110101011001100110010101111")
 s3.process()
 
 print("----------------------------------")
 
-s4 = Signal("101", "010", "100110011001")
+s4 = Signal("s4", "101", "010", "100110011001")
 s4.process()

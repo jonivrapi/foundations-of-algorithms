@@ -62,6 +62,10 @@
 
 \textbf{Problem 1d.} This algorithm processes the signal "as it comes in" via a single for loop which iterates through the input string only once for an $O(n)$ time. There are many comparisons that are made, all of which are $O(1)$ operations. Finally, to get the noise in the signal, it generates another array of size $m < n$ in $O(m)$ time. In total, this is $O(n) + O(m)$ which is linear with respect to inputs, so this is an $O(n)$ algorithm.
 
+\hfill
+
+\textbf{Problem 2c.} In three out of the four test cases, there was no noise, so per my analysis in Problem 1d, I would expect the length of the input to equal the number of iterations my program made. The instrumentation in tests ${s1, s2, s4}$ confirm this. The third test case $s3$ has 12 elements of noise, on an input of length 33. Per my analysis in Problem 1d, I would expect the total number of iterations to be $33 + 12 = 45$, and the instrumentation also confirms this. Therefore, we can conclude that this algorithm does in fact run in $O(n)$ time. 
+
 \newpage
 \bibliography{citation} 
 \bibliographystyle{ieeetr}
